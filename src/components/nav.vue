@@ -47,7 +47,7 @@ export default {
 
 <template>
   <div class = "main-wrapper">
-    <nav class = "navbar  ">
+    <nav class = "navbar">
 
       <div class = "navbar-collapse order-2 order-md-1">
         <ul class = "navbar-nav">
@@ -122,53 +122,57 @@ export default {
               NOSOTROS
             </a>
           </li>
+
+          <div class = "brand-and-icon order-1  order-md-2">
+
+            <button type = "button" class = "navbar-toggler">
+              <i class = "fas fa-bars"></i>
+            </button>
+            <a href = "/" class = "navbar-brand">3ETERN</a>
+          </div>
+
+
+          <div class = "navbar-collapse order-3">
+            <ul class = "navbar-nav ">
+              <li>
+                <a href = "#">CUENTA</a>
+              </li>
+              <li>
+                <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" >CARRITO ({{carrito.length}})</a>
+              </li>
+              <div class="offcanvas-wrapper">
+                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+                  <div class="offcanvas-header">
+                    <h6 class="offcanvas-title" id="offcanvasExampleLabel">CARRITO</h6>
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                  </div>
+                  <div class="offcanvas-body">
+                    <div v-for="(producto, index) in carrito" :key="index" class="cart-object row">
+                      <img class="col-3 img-carrito" :src="producto.imagenes?.url_1" alt="Producto">
+                      <div class="col-6">
+                        <p class="carrito-text">{{ producto.nombre }}</p>
+                        <p class="carrito-text">{{ producto.precio }} EUR</p>
+                        <p class="carrito-text">Talla: {{ producto.talla }}</p>
+                      </div>
+                      <div class="col-3 btn-delete">
+                        <a class="underlined" @click="eliminarDelCarrito(index)">Eliminar</a>
+                      </div>
+                    </div>
+                    <div class="row" id="totalPrice">
+                      <a class="col-3">TOTAL</a>
+                      <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
+                      <button class="checkout-button">Checkout</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </ul>
+          </div>
+
         </ul>
-      </div>
-
-        <div class = "brand-and-icon order-1  order-md-2">
-
-         <button type = "button" class = "navbar-toggler">
-          <i class = "fas fa-bars"></i>
-          </button>
-         <a href = "/" class = "navbar-brand">3ETERN</a>
-        </div>
 
          <!-------------------------------------------------------------------------------------------------00-->
-      <div class = "navbar-collapse order-3">
-        <ul class = "navbar-nav justify-content-end">
-          <li>
-            <a href = "#">CUENTA</a>
-          </li>
-          <li>
-            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" >CARRITO ({{carrito.length}})</a>
-          </li>
-          <div class="offcanvas-wrapper">
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-              <div class="offcanvas-header">
-                <h6 class="offcanvas-title" id="offcanvasExampleLabel">CARRITO</h6>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
-              <div class="offcanvas-body">
-                <div v-for="(producto, index) in carrito" :key="index" class="cart-object row">
-                  <img class="col-3 img-carrito" :src="producto.imagenes?.url_1" alt="Producto">
-                  <div class="col-6">
-                    <p class="carrito-text">{{ producto.nombre }}</p>
-                    <p class="carrito-text">{{ producto.precio }} EUR</p>
-                    <p class="carrito-text">Talla: {{ producto.talla }}</p>
-                  </div>
-                  <div class="col-3 btn-delete">
-                    <a class="underlined" @click="eliminarDelCarrito(index)">Eliminar</a>
-                  </div>
-                </div>
-                <div class="row" id="totalPrice">
-                  <a class="col-3">TOTAL</a>
-                  <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
-                  <button class="checkout-button">Checkout</button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </ul>
+
       </div>
     </nav>
 
