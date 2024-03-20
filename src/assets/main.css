@@ -195,7 +195,7 @@ body{
 }
 .navbar{
     background: #fff;
-    padding: 0 1rem;
+    padding: 0 0;
     position: fixed;
     top: 0;
     left: 0;
@@ -209,9 +209,8 @@ body{
 .brand-and-icon{
     display: flex;
     justify-content: space-between;
-    padding: 1rem 0;
+    padding: 1rem 2rem;
     border-bottom: 1px solid #ddd;
-    margin-right: 30%;
 }
 .navbar-brand{
     font-size: 1.8rem;

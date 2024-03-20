@@ -5,24 +5,10 @@ import {categoriasStore} from "@/stores/categoriasStore.js";
 export default {
   data() {
     return {
-      isMenuOpen: false
     };
   },
 
   methods: {
-    toggleMenu() {
-      this.isMenuOpen = !this.isMenuOpen;
-    },
-    closeMenu() {
-      this.isMenuOpen = false;
-    },
-    handleResize() {
-      if (window.innerWidth > 992) {
-        this.closeMenu();
-      }
-    },
-
-
     ...mapActions(categoriasStore, ['calcularPrecioTotal']),
     agregarAlCarrito(producto) {
       categoriasStore().agregarAlCarrito(producto);
@@ -35,9 +21,7 @@ export default {
     this.calcularPrecioTotal()
     window.addEventListener('resize', this.handleResize);
   },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.handleResize);
-  },
+
 
   computed: {
     ...mapState(categoriasStore,{carrito: 'carrito',precioCarrito:'precioCarrito'}),
@@ -46,140 +30,95 @@ export default {
 </script>
 
 <template>
-  <div class = "main-wrapper">
-    <nav class = "navbar">
+  <div class="row nav-content">
+    <nav class="nav col-12 col-md-5">
+      <div class="col-5 info-left">
+        <a  href="#" data-bs-toggle="dropdown"
+           data-bs-auto-close="outside">CATEGORIAS  <i class = "fas fa-chevron-down"></i> </a>
+        <div class="dropdown-menu shadow">
 
-      <div class = "navbar-collapse order-2 order-md-1">
-        <ul class = "navbar-nav">
-          <li>
-            <a href = "categorias.html" class = "menu-link">
-              CATEGORIAS
-              <span class = "drop-icon">
-                <i class = "fas fa-chevron-down"></i>
-              </span>
-            </a>
-            <div class = "sub-menu">
+            <div class="container-fluid">
+              <div class = "sub-menu row">
 
-              <div class = "sub-menu-item">
-                <h4>Ropa</h4>
-                <ul>
-                  <li><a href = "#">Sudaderas</a></li>
-                  <li><a href = "#">Jerseys</a></li>
-                  <li><a href = "#">Camisetas</a></li>
-                  <li><a href = "#">Pantalones</a></li>
-                  <li><a href = "#">Cazadoras</a></li>
-                </ul>
-              </div>
+                <div class = "col-3 sub-menu-item">
+                  <h4>Ropa</h4>
+                  <ul>
+                    <li><a href = "#">Sudaderas</a></li>
+                    <li><a href = "#">Jerseys</a></li>
+                    <li><a href = "#">Camisetas</a></li>
+                    <li><a href = "#">Pantalones</a></li>
+                    <li><a href = "#">Cazadoras</a></li>
+                  </ul>
+                </div>
 
-              <div class = "sub-menu-item">
-                <h4>Complementos</h4>
-                <ul>
-                  <li><a href = "#">Gorras</a></li>
-                  <li><a href = "#">Bolsos</a></li>
-                </ul>
-              </div>
-            </div>
-          </li>
-
-          <li>
-            <a class = "menu-link">
-              ESTILOS
-              <span class = "drop-icon">
-                <i class = "fas fa-chevron-down"></i>
-              </span>
-            </a>
-            <div class = "sub-menu">
-
-              <div class = "sub-menu-item">
-                <h4>Nuestros estilos</h4>
-                <ul>
-                  <li><a href = "#">Old Money Style</a></li>
-                  <li><a href = "#">Basics</a></li>
-                  <li><a href = "#">Dailies</a></li>
-                  <li><a href = "#">For the weekend</a></li>
-                  <li><a href = "#">The craziest one's</a></li>
-                </ul>
-              </div>
-
-              <div class = "sub-menu-item">
-
-              </div>
-
-              <div class = "sub-menu-item">
-                <h2>Vintage clothing</h2>
-              </div>
-            </div>
-          </li>
-
-          <li>
-            <a href = "#" class = "menu-link">
-              OFERTAS
-            </a>
-          </li>
-
-          <li>
-            <a href = "#" class = "menu-link">
-              NOSOTROS
-            </a>
-          </li>
-
-          <div class = "brand-and-icon order-1  order-md-2">
-
-            <button type = "button" class = "navbar-toggler">
-              <i class = "fas fa-bars"></i>
-            </button>
-            <a href = "/" class = "navbar-brand">3ETERN</a>
-          </div>
-
-
-          <div class = "navbar-collapse order-3">
-            <ul class = "navbar-nav ">
-              <li>
-                <a href = "#">CUENTA</a>
-              </li>
-              <li>
-                <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" >CARRITO ({{carrito.length}})</a>
-              </li>
-              <div class="offcanvas-wrapper">
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-                  <div class="offcanvas-header">
-                    <h6 class="offcanvas-title" id="offcanvasExampleLabel">CARRITO</h6>
-                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                  </div>
-                  <div class="offcanvas-body">
-                    <div v-for="(producto, index) in carrito" :key="index" class="cart-object row">
-                      <img class="col-3 img-carrito" :src="producto.imagenes?.url_1" alt="Producto">
-                      <div class="col-6">
-                        <p class="carrito-text">{{ producto.nombre }}</p>
-                        <p class="carrito-text">{{ producto.precio }} EUR</p>
-                        <p class="carrito-text">Talla: {{ producto.talla }}</p>
-                      </div>
-                      <div class="col-3 btn-delete">
-                        <a class="underlined" @click="eliminarDelCarrito(index)">Eliminar</a>
-                      </div>
-                    </div>
-                    <div class="row" id="totalPrice">
-                      <a class="col-3">TOTAL</a>
-                      <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
-                      <button class="checkout-button">Checkout</button>
-                    </div>
-                  </div>
+                <div class = "col-3 sub-menu-item">
+                  <h4>Complementos</h4>
+                  <ul>
+                    <li><a href = "#">Gorras</a></li>
+                    <li><a href = "#">Bolsos</a></li>
+                  </ul>
                 </div>
               </div>
-            </ul>
-          </div>
 
-        </ul>
 
-         <!-------------------------------------------------------------------------------------------------00-->
+            </div>
 
+        </div>
+
+        <a>ESTILOS</a>
+        <a>OFERTAS</a>
+        <a>NOSOTROS</a>
+      </div>
+      <div class="col-2 logo">
+        <a>3ETERN</a>
+      </div>
+      <div class="col-5 info-right justify-content-end">
+        <a>CUENTA</a>
+        <a>CARRITO</a>
       </div>
     </nav>
-
   </div>
-
 </template>
+
 <style scoped>
+.shadow{
+  width: 100%;
+}
+.nav-content{
+  background-color: white;
+  width: 100%;
+  height: 80px;
+}
+.nav{
+  width: 100%
+}
+.info-left{
+  text-align: left;
+  padding: 20px;
+  margin-top: 10px;
+}
+.logo{
+  text-align: center;
+  padding: 20px;
+  font-weight: bold !important;
+  font-size: 30px!important;
+}
+.info-right{
+  text-align: right;
+  padding: 20px;
+  margin-top: 10px;
+}
+.info-left,.info-right{
+  font-size: 0.8rem;
+  font-weight: 700
+}
+a{
+  padding: 1.7rem 1.8rem 1.7rem 0.8rem;
+}
+.sub-menu{
+  height: 200px;
+  width: 100%;
+}
 /*  el relative del navbar */
 
 .offcanvas-wrapper {
@@ -257,4 +196,114 @@ export default {
   margin-bottom: 0 !important;
   background-color: #fff;
 }
+/*
+  <div class = "main-wrapper">
+    <nav class = "navbar  ">
+
+      <div class = "navbar-collapse order-2 order-md-1">
+        <ul class = "navbar-nav">
+          <li>
+            <a href = "categorias.html" class = "menu-link">
+              CATEGORIAS
+              <span class = "drop-icon">
+                <i class = "fas fa-chevron-down"></i>
+              </span>
+            </a>
+
+          </li>
+
+          <li>
+            <a class = "menu-link">
+              ESTILOS
+              <span class = "drop-icon">
+                <i class = "fas fa-chevron-down"></i>
+              </span>
+            </a>
+            <div class = "sub-menu">
+
+              <div class = "sub-menu-item">
+                <h4>Nuestros estilos</h4>
+                <ul>
+                  <li><a href = "#">Old Money Style</a></li>
+                  <li><a href = "#">Basics</a></li>
+                  <li><a href = "#">Dailies</a></li>
+                  <li><a href = "#">For the weekend</a></li>
+                  <li><a href = "#">The craziest one's</a></li>
+                </ul>
+              </div>
+
+              <div class = "sub-menu-item">
+
+              </div>
+
+              <div class = "sub-menu-item">
+                <h2>Vintage clothing</h2>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <a href = "#" class = "menu-link">
+              OFERTAS
+            </a>
+          </li>
+
+          <li>
+            <a href = "#" class = "menu-link">
+              NOSOTROS
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class = "brand-and-icon order-1  order-md-2">
+
+        <button type = "button" class = "navbar-toggler">
+          <i class = "fas fa-bars"></i>
+        </button>
+        <a href = "/" class = "navbar-brand">3ETERN</a>
+      </div>
+
+      <!-------------------------------------------------------------------------------------------------00-->
+      <div class = "navbar-collapse order-3">
+        <ul class = "navbar-nav justify-content-end">
+          <li>
+            <a href = "#">CUENTA</a>
+          </li>
+          <li>
+            <a data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" >CARRITO ({{carrito.length}})</a>
+          </li>
+          <div class="offcanvas-wrapper">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+              <div class="offcanvas-header">
+                <h6 class="offcanvas-title" id="offcanvasExampleLabel">CARRITO</h6>
+                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                <div v-for="(producto, index) in carrito" :key="index" class="cart-object row">
+                  <img class="col-3 img-carrito" :src="producto.imagenes?.url_1" alt="Producto">
+                  <div class="col-6">
+                    <p class="carrito-text">{{ producto.nombre }}</p>
+                    <p class="carrito-text">{{ producto.precio }} EUR</p>
+                    <p class="carrito-text">Talla: {{ producto.talla }}</p>
+                  </div>
+                  <div class="col-3 btn-delete">
+                    <a class="underlined" @click="eliminarDelCarrito(index)">Eliminar</a>
+                  </div>
+                </div>
+                <div class="row" id="totalPrice">
+                  <a class="col-3">TOTAL</a>
+                  <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
+                  <button class="checkout-button">Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </ul>
+      </div>
+    </nav>
+
+  </div>
+
+ */
 </style>
