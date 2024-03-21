@@ -3,6 +3,7 @@
     object-fit: cover;
     max-height: 1000px;
 }
+
 .bloque{
     margin-left: 5px;
     margin-right: 5px;
@@ -62,11 +63,15 @@ section{
 }
 .card-body{
     min-height: 5px;
-    padding:  10px 10px 16px 10px;
+    padding:  10px 0px 0px 10px !important;
+}
+.card-body a{
+    text-decoration: none;
 }
 .card-category{
     border: solid white;
     text-align: center;
+
 }
 .nameProduct{
     text-align: left;
@@ -181,6 +186,7 @@ section{
 }
 body{
     line-height: 1.4;
+    padding: 0 !important;
 }
 
 .main-wrapper img{
@@ -216,7 +222,7 @@ body{
     font-size: 1.8rem;
     letter-spacing: 3px;
     font-weight: 700;
-    margin-left:63%;
+    margin-left:55%;
 }
 .navbar-toggler{
     display: block;

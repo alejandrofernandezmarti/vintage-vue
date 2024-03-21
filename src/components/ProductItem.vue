@@ -25,14 +25,16 @@ export default {
     <div class="card-product">
       <img :src="product.imagenes?.url_1" class="card-img-top  normal-image" alt="Producto 1">
       <img :src="product.imagenes?.url_2" class="card-img-top  hover-image" alt="Producto 1">
-      <div class="card-body">
-        <a :href="`/product/${product.id}`" class="nameProduct">{{ product.nombre }}</a>
-        <a :href="`/product/${product.id}`" class="namePrice">{{ mostrarPrecioSinDecimales(product.precio) }} EUR</a>
+      <div class="card-body row g-0">
+        <a :href="`/product/${product.id}`" class="nameProduct col-10">{{ product.nombre }}</a>
+        <a :href="`/product/${product.id}`" class="namePrice col-2">{{ mostrarPrecioSinDecimales(product.precio) }} EUR</a>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-
+.namePrice{
+  justify-content: left;
+}
 </style>

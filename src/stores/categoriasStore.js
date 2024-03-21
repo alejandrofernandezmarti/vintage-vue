@@ -8,6 +8,10 @@ export const categoriasStore = defineStore('categoriasStore', {
             brands:[],
             carrito: JSON.parse(localStorage.getItem('carrito')) || [],
             precioCarrito: 0,
+            filters: {
+                categorias: {},
+                marcas: {},
+            },
         }
     },
     actions: {
@@ -31,6 +35,11 @@ export const categoriasStore = defineStore('categoriasStore', {
         },
         calcularPrecioTotal() {
             this.precioCarrito = this.carrito.reduce((total, item) => total + item.precio, 0);
-        }
+        },
+        applyFilters(newFilters) {
+            this.filters = newFilters;
+            console.log(this.filters)
+        },
+
     }
 })

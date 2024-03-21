@@ -1,7 +1,7 @@
 <script>
 import ProductItem from '@/components/ProductItem.vue'
 import productsAxios from "@/repositories/productsAxios.js";
-import {mapState} from "pinia";
+import {mapActions, mapState} from "pinia";
 import {categoriasStore} from "@/stores/categoriasStore.js";
 
 export default {
@@ -19,10 +19,11 @@ export default {
 
   },
   async mounted(){
-    this.productos = await productsAxios.getAllProducts();
+    this.productos = await this.getAll();
   },
 
   methods: {
+    ...mapActions(categoriasStore, ['applyFilters']),
     ocultarOffcanvas() {
       const closeButton = document.getElementById('closeBtn')
       if (closeButton) {
@@ -30,8 +31,8 @@ export default {
       }
     },
     async aplicarFiltros() {
-      const categorias = {};
-      const marcas = {};
+      const categorias = [];
+      const marcas = [];
 
       this.categories.forEach(category => {
         const checkbox = document.querySelector(`input[name='categoria-${category.id}']`);
@@ -46,11 +47,16 @@ export default {
           marcas[brand.id] = true;
         }
       });
+
+      // Actualiza los filtros en Vuex
+      this.applyFilters({ categorias, marcas });
+
+      // Oculta el offcanvas
       this.ocultarOffcanvas();
 
-      this.productos = await productsAxios.filtrarProductos({ categorias: categorias, marcas: marcas });
-
-    }
+      // Filtra los productos
+      this.productos = await productsAxios.filtrarProductos({ categorias, marcas });
+    },
   },
 
 }
@@ -95,7 +101,7 @@ export default {
             <legend><strong>Marcas</strong></legend>
             <div class="linea-filtro" v-for="brand in brands" :key="brand.id">
               <a>{{ brand.nombre }}</a>
-              <input type="checkbox" :name="'marca-' + brand.id" :value="brand.id"><br>
+              <input type="checkbox"  :name="'marca-' + brand.id" :value="brand.id"><br>
             </div>
           </div>
           <button class="btn-filtro" type="submit">Aplicar Filtros</button>
@@ -106,7 +112,7 @@ export default {
 
 
     <div class="productos-filtrados col-12">
-      <div class="bloque row">
+      <div class="bloque row g-0">
         <ProductItem v-for="product in productos" :key="product.id" :product="product" ></ProductItem>
       </div>
     </div>
@@ -114,6 +120,21 @@ export default {
 </template>
 
 <style scoped>
+/*  Checkbbox  ---- */
+
+.linea-filtro {
+  margin-bottom: 5px; /* Espaciado entre cada línea */
+}
+
+.linea-filtro a {
+  display: inline-block; /* Alinea el texto y el checkbox en la misma línea */
+  margin-right: 10px; /* Espaciado entre el enlace y el checkbox */
+  font-size: 16px; /* Tamaño de fuente */
+  color: #333; /* Color de texto */
+  text-decoration: none; /* Sin subrayado */
+}
+/*    ---- */
+
 #toggleFiltersBtn{
   width: 80%;
   height: 40px;

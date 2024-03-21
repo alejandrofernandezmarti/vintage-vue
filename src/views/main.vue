@@ -33,7 +33,7 @@ export default {
     </div>
   </div>
 
-  <div class="bloque row no-gutters">
+  <div class="bloque row  g-0">
     <a class="titulos col-12"><strong>PRODUCTOS DESTACADOS</strong></a>
 
     <ProductItem v-for="product in productos" :key="product.id" :product="product" ></ProductItem>
