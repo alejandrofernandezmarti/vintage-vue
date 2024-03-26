@@ -29,7 +29,7 @@
     display: none;
 }
 .card-product {
-    border: solid white;
+    border: solid 1px white;
 }
 /* .card-product:hover {
     animation: 0.2s flash 0.5;
@@ -75,13 +75,15 @@ section{
 }
 .nameProduct{
     text-align: left;
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Helvetica, serif;
+    font-size: 15px;
     color: black;
 }
 .namePrice{
     float: right;
-    font-family: 'Courier New', Courier, monospace;
+    font-family:  Helvetica, serif;
     color: black;
+    font-size: 15px;
 
 }
 .name-category{

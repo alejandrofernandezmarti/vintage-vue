@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import CategoriesAxios from "@/repositories/categoriesAxios.js";
+import productsAxios from "@/repositories/productsAxios.js";
 
 export const categoriasStore = defineStore('categoriasStore', {
     state()  {
@@ -8,10 +9,8 @@ export const categoriasStore = defineStore('categoriasStore', {
             brands:[],
             carrito: JSON.parse(localStorage.getItem('carrito')) || [],
             precioCarrito: 0,
-            filters: {
-                categorias: {},
-                marcas: {},
-            },
+            productos: [],
+            productosCargados: false,
         }
     },
     actions: {
@@ -36,9 +35,25 @@ export const categoriasStore = defineStore('categoriasStore', {
         calcularPrecioTotal() {
             this.precioCarrito = this.carrito.reduce((total, item) => total + item.precio, 0);
         },
-        applyFilters(newFilters) {
-            this.filters = newFilters;
-            console.log(this.filters)
+        async cargarProductos() {
+            if (!this.productosCargados) {
+                const productosGuardados = localStorage.getItem('productos');
+                if (productosGuardados) {
+                    // Si hay productos guardados en el localStorage, cárgalos en el estado de Vuex
+                    this.productos = JSON.parse(productosGuardados);
+                    this.productosCargados = true;
+                } else {
+                    // Si no hay productos guardados, haz la petición para obtenerlos y guárdalos en el localStorage
+                    // Supongamos que productsAxios.getAllProducts() devuelve una promesa con los productos
+                    productsAxios.getAllProducts().then((productos) => {
+                        this.productos = productos;
+                        this.productosCargados = true;
+                        localStorage.setItem('productos', JSON.stringify(productos));
+                    }).catch((error) => {
+                        console.error("Error al cargar productos:", error);
+                    });
+                }
+            }
         },
 
     }

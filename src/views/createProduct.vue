@@ -38,7 +38,7 @@ export default {
     ...mapState(categoriasStore,{categories: 'categories',brands:'brands'}),
   },
   methods: {
-    handleImageUpload(index) {
+   /* handleImageUpload(index) {
       const inputId = `url_${index}`;
       const input = document.getElementById(inputId);
       const file = input.files[0];
@@ -59,6 +59,22 @@ export default {
         // Si no se selecciona ningún archivo, borrar tanto el nombre del archivo como la URL de la imagen
         this.data.imagenes[inputId] = '';
         this.data.imagenes[`preview_${inputId}`] = '';
+      }
+    }, */
+    handleImageUpload(index) {
+      const inputId = `url_${index}`;
+      const input = document.getElementById(inputId);
+      const file = input.files[0];
+
+      if (file) {
+        // Crear un objeto URL para mostrar una vista previa de la imagen
+        const imageUrl = URL.createObjectURL(file);
+
+        // Asignar la URL de la imagen al objeto de imágenes
+        this.data.imagenes[inputId] = imageUrl;
+      } else {
+        // Si no se selecciona ningún archivo, borrar la URL de la imagen
+        this.data.imagenes[inputId] = '';
       }
     },
     async submitForm() {
@@ -113,32 +129,32 @@ export default {
       <div class="form-group">
         <label for="url_1">Imagen 1:</label>
         <input type="file" id="url_1" @change="handleImageUpload(1)">
-        <img v-if="data.imagenes.url_1" :src="data.imagenes.preview_url_1" class="preview-image">
+        <img v-if="data.imagenes.url_1" :src="data.imagenes.url_1" class="preview-image">
       </div>
       <div class="form-group">
         <label for="url_2">Imagen 2:</label>
         <input type="file" id="url_2" @change="handleImageUpload(2)">
-        <img v-if="data.imagenes.url_2" :src="data.imagenes.preview_url_2" class="preview-image">
+        <img v-if="data.imagenes.url_2" :src="data.imagenes.url_2" class="preview-image">
       </div>
       <div class="form-group">
         <label for="url_3">Imagen 3:</label>
         <input type="file" id="url_3" @change="handleImageUpload(3)">
-        <img v-if="data.imagenes.url_3" :src="data.imagenes.preview_url_3" class="preview-image">
+        <img v-if="data.imagenes.url_3" :src="data.imagenes.url_3" class="preview-image">
       </div>
       <div class="form-group">
         <label for="url_4">Imagen 4:</label>
         <input type="file" id="url_4" @change="handleImageUpload(4)">
-        <img v-if="data.imagenes.url_4" :src="data.imagenes.preview_url_4" class="preview-image">
+        <img v-if="data.imagenes.url_4" :src="data.imagenes.url_4" class="preview-image">
       </div>
       <div class="form-group">
         <label for="url_5">Imagen 5:</label>
         <input type="file" id="url_5" @change="handleImageUpload(5)">
-        <img v-if="data.imagenes.url_5" :src="data.imagenes.preview_url_5" class="preview-image">
+        <img v-if="data.imagenes.url_5" :src="data.imagenes.url_5" class="preview-image">
       </div>
       <div class="form-group">
         <label for="url_6">Imagen 6:</label>
         <input type="file" id="url_6" @change="handleImageUpload(6)">
-        <img v-if="data.imagenes.url_6" :src="data.imagenes.preview_url_6" class="preview-image">
+        <img v-if="data.imagenes.url_6" :src="data.imagenes.url_6" class="preview-image">
       </div>
       <div class="form-group">
         <button type="submit" class="btn-submit">Guardar Producto</button>
@@ -158,22 +174,22 @@ export default {
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img :src="data.imagenes.preview_url_1" class="img-carousel d-block" alt="...">
+            <img :src="data.imagenes.url_1" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="data.imagenes.preview_url_2" class="img-carousel d-block" alt="...">
+            <img :src="data.imagenes.url_2" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="data.imagenes.preview_url_3" class="img-carousel d-block" alt="...">
+            <img :src="data.imagenes.url_3" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="data.imagenes.preview_url_4" class="img-carousel d-block" alt="...">
+            <img :src="data.imagenes.url_4" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="data.imagenes.preview_url_5" class="img-carousel d-block" alt="...">
+            <img :src="data.imagenes.url_5" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="data.imagenes.preview_url_6" class="img-carousel d-block" alt="...">
+            <img :src="data.imagenes.url_6" class="img-carousel d-block" alt="...">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
@@ -189,12 +205,12 @@ export default {
 
     <div class="col-12 col-md-8" id="img-grande">
       <div class="fotosDiv row g-0">
-        <div  class="col-12 col-md-6" ><img :src="data.imagenes.preview_url_1" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="data.imagenes.preview_url_2" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="data.imagenes.preview_url_3" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="data.imagenes.preview_url_4" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="data.imagenes.preview_url_5" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="data.imagenes.preview_url_6" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="data.imagenes.url_1" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="data.imagenes.url_2" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="data.imagenes.url_3" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="data.imagenes.url_4" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="data.imagenes.url_5" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="data.imagenes.url_6" class="card-img-top" alt="Detalle del Producto"></div>
       </div>
     </div>
 

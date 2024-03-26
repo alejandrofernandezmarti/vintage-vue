@@ -26,8 +26,11 @@ export default {
       <img :src="product.imagenes?.url_1" class="card-img-top  normal-image" alt="Producto 1">
       <img :src="product.imagenes?.url_2" class="card-img-top  hover-image" alt="Producto 1">
       <div class="card-body row g-0">
-        <a :href="`/product/${product.id}`" class="nameProduct col-10">{{ product.nombre }}</a>
-        <a :href="`/product/${product.id}`" class="namePrice col-2">{{ mostrarPrecioSinDecimales(product.precio) }} EUR</a>
+        <a :href="`/product/${product.id}`" class="nameProduct text-uppercase col-8">{{ product.nombre }}</a>
+        <div class="col-4">
+          <s class="namePrice descuento text-muted " v-if="product.descuento !== null">{{ mostrarPrecioSinDecimales(product.descuento)}}EUR</s><a :href="`/product/${product.id}`" class="namePrice mr-2">{{ mostrarPrecioSinDecimales(product.precio) }} EUR  </a>
+
+        </div>
       </div>
     </div>
   </div>
@@ -37,4 +40,8 @@ export default {
 .namePrice{
   justify-content: left;
 }
+.descuento{
+  padding-left: 10px;
+}
+
 </style>

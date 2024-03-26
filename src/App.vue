@@ -9,13 +9,14 @@ export default {
   async mounted() {
     try {
       await this.loadCategorias()
+      await this.cargarProductos()
     } catch (error) {
       console.log(error)
     }
   },
 
   methods: {
-    ...mapActions(categoriasStore, ['loadCategorias']),
+    ...mapActions(categoriasStore, ['loadCategorias','cargarProductos']),
   }
 }
 </script>

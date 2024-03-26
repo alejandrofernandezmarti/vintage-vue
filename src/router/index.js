@@ -4,7 +4,10 @@ import productList from "@/views/productList.vue";
 import categoriasList from "@/views/categorias.vue";
 import productsByCategorie from "@/views/productsByCategoria.vue";
 import createProduct from "@/views/createProduct.vue";
+import miCuenta from "@/views/miCuenta.vue";
+import login from "@/views/LoginView.vue";
 import index from "@/views/main.vue"
+import orderDetail from "@/views/orderDetail.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -39,6 +42,19 @@ const router = createRouter({
       path: '/newProduct',
       name: 'New Product',
       component: createProduct,
+    },{
+      path: '/cuenta',
+      name: 'Mi cuenta',
+      component: miCuenta,
+    },{
+      path: '/login',
+      name: 'Login',
+      component: login,
+    },{
+      path: '/order/:id',
+      name: 'Compra',
+      component: orderDetail,
+      props: true
     },
   ]
 })

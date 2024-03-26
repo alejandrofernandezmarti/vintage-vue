@@ -11,7 +11,7 @@ export default {
 </script>
 
 <template>
-  <div class="bloque row no-gutters">
+  <div class="bloque row no-gutters g-0">
     <a class="titulos col-12"><strong>CATEGORÍAS</strong></a>
 
     <div v-for="categoria in categories" :key="categoria.id" class="col-6 col-md-4 col-xl-3">

@@ -52,22 +52,22 @@ export default {
         </div>
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img :src="'/' + product.imagenes?.url_1" class="img-carousel d-block" alt="...">
+            <img :src="product.imagenes?.url_1" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="'/' + product.imagenes?.url_2" class="img-carousel d-block" alt="...">
+            <img :src="product.imagenes?.url_2" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="'/' + product.imagenes?.url_3" class="img-carousel d-block" alt="...">
+            <img :src="product.imagenes?.url_3" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="'/' + product.imagenes?.url_4" class="img-carousel d-block" alt="...">
+            <img :src="product.imagenes?.url_4" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="'/' + product.imagenes?.url_5" class="img-carousel d-block" alt="...">
+            <img :src="product.imagenes?.url_5" class="img-carousel d-block" alt="...">
           </div>
           <div class="carousel-item">
-            <img :src="'/' + product.imagenes?.url_6" class="img-carousel d-block" alt="...">
+            <img :src="product.imagenes?.url_6" class="img-carousel d-block" alt="...">
           </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
@@ -83,12 +83,12 @@ export default {
 
     <div class="col-12 col-md-8" id="img-grande">
       <div class="fotosDiv row g-0">
-        <div  class="col-12 col-md-6" ><img :src="'/' + product.imagenes?.url_1" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="'/' + product.imagenes?.url_2" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="'/' + product.imagenes?.url_3" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="'/' + product.imagenes?.url_4" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="'/' + product.imagenes?.url_5" class="card-img-top" alt="Detalle del Producto"></div>
-        <div  class="col-12 col-md-6" ><img :src="'/' + product.imagenes?.url_6" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="product.imagenes?.url_1" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="product.imagenes?.url_2" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="product.imagenes?.url_3" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="product.imagenes?.url_4" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="product.imagenes?.url_5" class="card-img-top" alt="Detalle del Producto"></div>
+        <div  class="col-12 col-md-6" ><img :src="product.imagenes?.url_6" class="card-img-top" alt="Detalle del Producto"></div>
       </div>
     </div>
 
@@ -96,6 +96,7 @@ export default {
       <h2 class="productName" >{{product.nombre}}</h2><br>
       <p class="text-muted">TALLA: {{product.talla}}</p>
       <p class="text-muted">Marca: {{product.marca}}</p>
+      <p  v-if="product.descuento !== null" class="text-muted">Precio anterior: <s>{{product.descuento}} €</s></p>
       <p class="text-muted">Precio: {{product.precio}} €</p>
       <br>
       <h5 class="productName">Medidas: </h5>

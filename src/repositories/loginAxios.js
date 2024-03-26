@@ -30,6 +30,16 @@ export default{
     async getToken (email,password){    
         const token = await apiLogin.post(`/api/login/?email=${email}&password=${password}`);
         return token.data;
+    },
+    async login(user) {
+        console.log(user)
+        // eslint-disable-next-line no-useless-catch
+        try {
+            const token = await apiLogin.post(`/api/login/?email=${user.email}&password=${user.password}`)
+            return token.data
+        } catch (error) {
+            throw error
+        }
     }
 }
 

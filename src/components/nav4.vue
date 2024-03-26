@@ -41,7 +41,7 @@ export default {
         <span class="fas fa-bars options" data-bs-toggle="offcanvas" href="#offcanvasCat" role="button" aria-controls="offcanvasExample"></span>
       </div>
       <div class="col-4 xs-logo ">
-        <a>3ETERN</a>
+        <a href="/">3ETERN</a>
 
         <div class="offcanvas-wrapper">
           <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasCat" aria-labelledby="offcanvasExampleLabel">
@@ -95,7 +95,7 @@ export default {
                     Nosotros
                   </button>
                 </li>
-                <li class="mb-1">
+                <li class="mb-1" href="/cuenta">
                   <button class="btn d-inline-flex  rounded" >
                     Cuenta
                   </button>
@@ -192,12 +192,12 @@ export default {
 
         <div class = "d-none d-sm-block brand-and-icon order-1  order-md-2 col-6">
           <li >
-            <a href = "index.html" class = "navbar-brand xs-logo">3ETERN</a>
+            <a href = "/" class = "navbar-brand xs-logo">3ETERN</a>
           </li>
         </div>
         <div class="nav-right navbar-nav order-3 justify-content-end col-2">
           <li class="carrito  " >
-            <a class="align-self-center" href = "#">CUENTA</a>
+            <a class="align-self-center" href="/cuenta">CUENTA</a>
           </li>
           <li class="order-3 carrito  " >
             <a class="align-self-center" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" ><a>CARRITO</a>

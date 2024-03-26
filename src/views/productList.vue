@@ -1,7 +1,7 @@
 <script>
 import ProductItem from '@/components/ProductItem.vue'
 import productsAxios from "@/repositories/productsAxios.js";
-import {mapActions, mapState} from "pinia";
+import {mapState} from "pinia";
 import {categoriasStore} from "@/stores/categoriasStore.js";
 
 export default {
@@ -15,24 +15,28 @@ export default {
     }
   },
   computed: {
-    ...mapState(categoriasStore,{categories: 'categories',brands:'brands'}),
+    ...mapState(categoriasStore,{categories: 'categories',brands:'brands',productos:'productos'}),
 
   },
   async mounted(){
-    this.productos = await this.getAll();
+    await this.loadProducts();
   },
 
   methods: {
-    ...mapActions(categoriasStore, ['applyFilters']),
     ocultarOffcanvas() {
       const closeButton = document.getElementById('closeBtn')
       if (closeButton) {
         closeButton.click()
       }
     },
+    async loadProducts(){
+      if (this.productos.length < 1){
+        this.productos = await productsAxios.getAllProducts();
+      }
+    },
     async aplicarFiltros() {
-      const categorias = [];
-      const marcas = [];
+      const categorias = {};
+      const marcas = {};
 
       this.categories.forEach(category => {
         const checkbox = document.querySelector(`input[name='categoria-${category.id}']`);
@@ -47,16 +51,11 @@ export default {
           marcas[brand.id] = true;
         }
       });
-
-      // Actualiza los filtros en Vuex
-      this.applyFilters({ categorias, marcas });
-
-      // Oculta el offcanvas
       this.ocultarOffcanvas();
 
-      // Filtra los productos
-      this.productos = await productsAxios.filtrarProductos({ categorias, marcas });
-    },
+      this.productos = await productsAxios.filtrarProductos({ categorias: categorias, marcas: marcas });
+
+    }
   },
 
 }

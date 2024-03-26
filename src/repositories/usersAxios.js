@@ -2,7 +2,7 @@ import axios from 'axios'
 const SERVER = import.meta.env.VITE_URL_API
 const DEBUG = true
 
-const apiLogin = axios.create({
+const apiUsers = axios.create({
     baseURL: SERVER,
     withCredentials: false,
     headers: {
@@ -11,37 +11,56 @@ const apiLogin = axios.create({
     }
 })
 
-axios.interceptors.response.use((response) => {
-    if (DEBUG) {
-        console.info('Response: ', response)
+apiUsers.interceptors.request.use(
+    (config) => {
+        const token = localStorage.token
+        if (token) {
+            config.headers['Authorization'] = `Bearer ${token}`
+        }
+        return config
+    },
+    (error) => {
+        console.error('Interceptor error:', error)
+        return Promise.reject(error)
     }
-    return response
-}, (error) => {
-    if (error.response && error.response.status !== 400) {
-        alert('Response error ' + error.response.status + '(' + error.response.statusText + ')')
+)
+
+apiUsers.interceptors.response.use(
+    (response) => {
+        return response
+    },
+    (error) => {
+        if (error.response.status === 401) {
+            console.log(error)
+        }
+        return Promise.reject(error)
     }
-    if (DEBUG) {
-        console.info('Response error: ', error)
-    }
-    return Promise.reject(error)
-})
+)
 
 export default{
-    async getAllStudents (){    
-        const students = await apiLogin.get(`/api/alumnos/`);
-        return students.data.data;
+    async getUserInfo(){
+        try {
+            const response = await apiUsers.get(`/api/user/getInfo`);
+            return response.data.data;
+        } catch (error) {
+            return false
+        }
     },
-    async getAllStudentsByCycle (idCycle) {
-        const students = await apiLogin.get(`/api/alumnos/ciclos/${idCycle}`);
-        return students.data.data;
+    async getCompra(id){
+        try {
+            const response = await apiUsers.get(`/api/compras/${id}`);
+            return response.data.data;
+        } catch (error) {
+            return false
+        }
     },
-    async getAllEmpresas (){    
-        const empresas = await apiLogin.get(`/api/empresas/`);
-        return empresas.data.data;
+    async getProductos(idOrder){
+        try {
+            const response = await apiUsers.get(`/api/compras/${idOrder}/productos`);
+            return response.data.data;
+        } catch (error) {
+            return false
+        }
     },
-    async getAllResponsables () {
-        const responsables = await apiLogin.get(`/api/responsables/`)
-        return responsables.data.data;
-    }
 }
 
