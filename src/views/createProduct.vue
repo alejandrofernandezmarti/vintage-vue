@@ -1,4 +1,5 @@
 <script>
+import { reactive } from 'vue';
 import {mapState} from "pinia";
 import {categoriasStore} from "@/stores/categoriasStore.js";
 import productsAxios from "@/repositories/productsAxios.js";
@@ -7,7 +8,7 @@ export default {
   data() {
     return {
       sizes: ['XXS', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'],
-      data:{
+      data: reactive({
         producto: {
           nombre: '',
           precio: 0,
@@ -31,13 +32,16 @@ export default {
           url_5: '',
           url_6: '',
         },
-      }
+      })
     };
   },
   computed: {
     ...mapState(categoriasStore,{categories: 'categories',brands:'brands'}),
   },
   methods: {
+    async submitForm() {
+      await productsAxios.createProduct(this.data)
+    },
    /* handleImageUpload(index) {
       const inputId = `url_${index}`;
       const input = document.getElementById(inputId);
@@ -62,23 +66,15 @@ export default {
       }
     }, */
     handleImageUpload(index) {
-      const inputId = `url_${index}`;
-      const input = document.getElementById(inputId);
-      const file = input.files[0];
+      const fileInput = document.getElementById(`url_${index}`);
+      const file = fileInput.files[0];
+      const reader = new FileReader();
 
-      if (file) {
-        // Crear un objeto URL para mostrar una vista previa de la imagen
-        const imageUrl = URL.createObjectURL(file);
+      reader.onload = () => {
+        this.data.imagenes[`url_${index}`] = reader.result; // Modifica la propiedad directamente
+      };
 
-        // Asignar la URL de la imagen al objeto de imágenes
-        this.data.imagenes[inputId] = imageUrl;
-      } else {
-        // Si no se selecciona ningún archivo, borrar la URL de la imagen
-        this.data.imagenes[inputId] = '';
-      }
-    },
-    async submitForm() {
-      await productsAxios.createProduct(this.data)
+      reader.readAsDataURL(file);
     }
   }
 };
