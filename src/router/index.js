@@ -8,6 +8,7 @@ import miCuenta from "@/views/miCuenta.vue";
 import login from "@/views/LoginView.vue";
 import index from "@/views/main.vue"
 import orderDetail from "@/views/orderDetail.vue";
+import checkout from "@/views/checkout.vue"
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -55,6 +56,11 @@ const router = createRouter({
       name: 'Compra',
       component: orderDetail,
       props: true
+    },
+    {
+      path: '/checkout',
+      name: 'Checkout',
+      component: checkout,
     },
   ]
 })

@@ -25,6 +25,7 @@ export default {
       // Redirecciona al usuario al producto
       this.$router.push(`/order/${id}`);
     }
+
   }
 }
 </script>
@@ -49,7 +50,6 @@ export default {
           <td>Fecha</td>
           <td>Método de Pago</td>
           <td>Estado</td>
-          <td>ID Usuario</td>
         </tr>
         </thead>
         <tbody>
@@ -58,7 +58,6 @@ export default {
           <td class="text-muted fila">{{ formatDate(pedido.fecha) }}</td>
           <td class="text-muted fila">{{ pedido.metodo_pago }}</td>
           <td class="text-muted fila">{{ pedido.estado }}</td>
-          <td class="text-muted fila">{{ pedido.id_user }}</td>
         </tr>
         </tbody>
       </table>
