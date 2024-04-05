@@ -40,7 +40,10 @@ apiCycles.interceptors.response.use(
 export default {
   async getCompras() {
     const cycles = await apiCycles.get('/api/user/compras')
-      console.log(cycles)
     return cycles.data.data
   },
+  async newOrder(){
+    const cycles = await apiCycles.post('/api/compras/newOrder')
+    return cycles.data.data
+  }
 }

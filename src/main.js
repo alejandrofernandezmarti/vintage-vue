@@ -2,6 +2,7 @@ import './assets/main.css'
 import { createPinia } from 'pinia'
 import router from './router'
 import { createApp } from 'vue'
+import VueStripeElementPlus from 'vue-stripe-elements-plus'
 import App from './App.vue'
 
 
@@ -12,6 +13,6 @@ import 'jquery/dist/jquery.slim.min.js'; // Importa jQuery slim
 import 'jquery/dist/jquery.min.js'; // Importa jQuery
 import '@popperjs/core/dist/umd/popper.min.js'; // Importa Popper.js
 import './script.js'
-const app = createApp(App).use(createPinia()).use(router)
+const app = createApp(App).use(createPinia()).use(VueStripeElementPlus).use(router)
 
 app.mount('#app')
