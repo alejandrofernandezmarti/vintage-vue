@@ -1,5 +1,5 @@
 <script >
-import NavBar from '@/components/nav4.vue'
+import NavBar from '@/components/nav.vue'
 import {categoriasStore} from "@/stores/categoriasStore.js";
 import {mapActions} from "pinia";
 export default {

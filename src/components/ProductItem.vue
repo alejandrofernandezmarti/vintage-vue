@@ -28,7 +28,7 @@ export default {
       <div class="card-body row g-0">
         <a :href="`/product/${product.id}`" class="nameProduct text-uppercase col-8">{{ product.nombre }}</a>
         <div class="col-4">
-          <s class="namePrice descuento text-muted " v-if="product.descuento !== null">{{ mostrarPrecioSinDecimales(product.descuento)}}EUR</s><a :href="`/product/${product.id}`" class="namePrice mr-2">{{ mostrarPrecioSinDecimales(product.precio) }} EUR  </a>
+          <a :href="`/product/${product.id}`" class="namePrice mr-2">{{ product.precio_ud}} EUR  </a>
 
         </div>
       </div>

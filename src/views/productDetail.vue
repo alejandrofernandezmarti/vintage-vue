@@ -8,7 +8,9 @@ export default {
   data(){
     return{
       product: {},
-
+      quantities: [10, 20, 30, 50, 70, 100],
+      selectedQuantity: 0,
+      discountPrice: this.product?.precio_ud,
     }
   },
 
@@ -19,12 +21,17 @@ export default {
   computed: {
     ...mapState(categoriasStore,{carrito: 'carrito'}),
     enCarrito() {
-      return this.carrito.some(item => item.id === this.product.id);
+      return this.carrito.some(item => item.id === this.product.id && this.product.tipo === 'Selected');
     }
   },
   methods:{
     agregarAlCarrito() {
-      categoriasStore().agregarAlCarrito(this.product);
+      if (this.product.tipo === 'Selected'){
+        categoriasStore().agregarAlCarrito(this.product);
+      }else {
+        categoriasStore().agregarBoxCarrito(this.product,this.selectedQuantity,this.discountPrice);
+      }
+
     },
     async loadProduct() {
       try {
@@ -34,6 +41,32 @@ export default {
       }
     },
 
+    selectQuantity(event,quantity) {
+      const cantidades = document.querySelectorAll('.option');
+
+      cantidades.forEach(cantidad => {
+        cantidad.classList.remove('selected');
+      });
+
+      event.target.classList.add('selected');
+      this.selectedQuantity = quantity;
+
+      let descuento = 0;
+
+      if (this.selectedQuantity === 20) {
+        descuento = 0.04;
+      } else if (this.selectedQuantity === 30) {
+        descuento = 0.08;
+      } else if (this.selectedQuantity === 50) {
+        descuento = 0.12;
+      } else if (this.selectedQuantity === 70) {
+        descuento = 0.16;
+      } else if (this.selectedQuantity === 100) {
+        descuento = 0.20;
+      }
+
+      this.discountPrice = (this.product?.precio_ud * (1 - descuento)).toFixed(2);
+    }
   }
 }
 </script>
@@ -81,7 +114,7 @@ export default {
       </div>
     </section>
 
-    <div class="col-12 col-md-8" id="img-grande">
+    <div class="col-12 col-md-7" id="img-grande">
       <div class="fotosDiv row g-0">
         <div  class="col-12 col-md-6" ><img :src="product.imagenes?.url_1" class="card-img-top" alt="Detalle del Producto"></div>
         <div  class="col-12 col-md-6" ><img :src="product.imagenes?.url_2" class="card-img-top" alt="Detalle del Producto"></div>
@@ -92,29 +125,92 @@ export default {
       </div>
     </div>
 
-    <div class="information col-12 col-md-4">
+    <div class="information col-12 col-md-5">
       <h2 class="productName" >{{product.nombre}}</h2><br>
-      <p class="text-muted">TALLA: {{product.talla}}</p>
-      <p class="text-muted">Marca: {{product.marca}}</p>
-      <p  v-if="product.descuento !== null" class="text-muted">Precio anterior: <s>{{product.descuento}} €</s></p>
-      <p class="text-muted">Precio: {{product.precio}} €</p>
-      <br>
-      <h5 class="productName">Medidas: </h5>
-      <p class="text-muted">Alto: {{product.medidas?.alto}} cm</p>
-      <p class="text-muted">Ancho: {{product.medidas?.ancho}} cm</p>
-      <p class="text-muted">Mangas: {{product.medidas?.manga}} cm</p><br>
 
+      <div v-if="product.tipo === 'Box' " class="cantidades row">
+        <h4 class="mb-4">Cantidad:</h4>
+        <div class="custom-select justify-content-center">
+          <div v-for="quantity in quantities" :key="quantity"  >
+            <div  class="col-2"><span class="option numberBorder" @click="selectQuantity($event,quantity)">{{ quantity }}</span></div>
+          </div>
+        </div>
+      </div>
+      <div v-if="product.tipo === 'Selected' " class="cantidades ">
+        <h4 class="col-6">Cantidad: {{product.cantidad}}</h4>
+      </div>
+
+      <p class="text-muted"> {{product.descripcion}}</p>
+      <p class="text-muted">Precio Ud. <s v-if="this.selectedQuantity >= 20"> {{product.precio_ud}} € </s><span v-if="this.selectedQuantity <= 10"> {{product.precio_ud}} € </span></p>
+      <p  v-if="this.selectedQuantity >= 20" class="text-muted">Precio oferta: {{discountPrice}} €</p>
+      <br>
       <h5 class="productName">Estado producto</h5>
         <p>{{product.estado}}</p>
         <br>
-        <button v-if="!enCarrito" @click="agregarAlCarrito" class="boton btn btn-primary">AÑADIR AL CARRITO</button>
-        <button v-if="enCarrito" class="boton btn btn-primary">AÑADIDO CORRECTAMENTE</button>
+        <span v-if="product.tipo === 'Box'">
+          <button v-if="this.selectedQuantity === 0" class="boton btn cartBtn">SELECCIONA UNA CANTIDAD</button>
+          <button v-if="this.selectedQuantity !== 0" @click="agregarAlCarrito" class="boton btn cartBtn">AÑADIR AL CARRITO</button>
+        </span>
+        <span v-if="product.tipo === 'Selected'">
+          <button v-if="enCarrito" class="boton btn cartBtn">AÑADIDO CORRECTAMENTE</button>
+          <button v-if="!enCarrito" @click="agregarAlCarrito" class="boton btn cartBtn">AÑADIR AL CARRITO</button>
+        </span>
+
+
+
     </div>
 
   </div>
 
 </template>
 
-<style scoped>
+<style>
+.btn{
+  border: 1px solid #000000 !important;
+}
+.btn:hover{
+  background-color: #e5e5e5 !important;
+}
+.cantidades{
+  display: flex;
+  padding-right: 10%;
+  margin-bottom: 30px;
+}
+.custom-select {
+  display: flex;
+  padding-right: 10%;
 
+}
+
+.option {
+  cursor: pointer;
+  border: solid 1px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 15px;
+  margin: 0 10px;
+}
+
+.option:hover {
+  background-color: #f0f0f0;
+}
+
+.selected {
+  background-color: #b7b7b7;
+  color: #ffffff;
+  border: 1px solid;
+}
+
+.selected:hover {
+  background-color: #838383;
+}
+.cantidad{
+  text-align: center;
+}
+.numberBorder{
+  border: solid 1px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 20px;
+}
 </style>

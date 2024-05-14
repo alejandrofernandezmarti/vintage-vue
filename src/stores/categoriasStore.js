@@ -27,13 +27,30 @@ export const categoriasStore = defineStore('categoriasStore', {
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
             this.calcularPrecioTotal();
         },
+        agregarBoxCarrito(producto,cantidad, precio) {
+            const productoCarrito = {
+                id: producto.id,
+                nombre: producto.nombre,
+                cantidad: cantidad,
+                imagenes: producto.imagenes,
+                descripcion: producto.descripcion,
+                tipo: producto.tipo,
+                precio_ud: precio
+            };
+            this.carrito.push(productoCarrito);
+
+            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+            this.calcularPrecioTotal();
+        },
         eliminarDelCarrito(index) {
             this.carrito.splice(index, 1);
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
             this.calcularPrecioTotal();
         },
         calcularPrecioTotal() {
-            this.precioCarrito = this.carrito.reduce((total, item) => total + item.precio, 0);
+            const precioTotal = this.carrito.reduce((total, item) => total + (item.precio_ud * item.cantidad), 0);
+
+            this.precioCarrito = precioTotal.toFixed(2);
         },
         async cargarProductos() {
             if (!this.productosCargados) {
