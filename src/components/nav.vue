@@ -136,7 +136,7 @@ export default {
               <div class="row" id="totalPrice">
                 <a class="col-3 total">TOTAL</a>
                 <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
-                <button class="checkout-button" data-bs-toggle="offcanvas" @click="redirectToCheckout">Checkout</button>
+                <button class="checkout-button" data-bs-toggle="offcanvas" @click="redirectToCheckout">CHECKOUT</button>
               </div>
             </div>
           </div>
@@ -230,7 +230,7 @@ export default {
                 <div class="row" id="totalPrice">
                   <a class="col-3">TOTAL</a>
                   <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
-                  <button class="checkout-button" data-bs-toggle="offcanvas"  @click="redirectToCheckout">Checkout</button>
+                  <button class="checkout-button" data-bs-toggle="offcanvas"  @click="redirectToCheckout">CHECKOUT</button>
                 </div>
               </div>
             </div>

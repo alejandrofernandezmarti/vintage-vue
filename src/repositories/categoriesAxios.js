@@ -31,10 +31,6 @@ export default {
         const cycles = await apiLogin.get('/api/categorias');
         return cycles.data;
     },
-    async getAllMarcas() {
-        const cycles = await apiLogin.get(`/api/marcas`);
-        return cycles.data.data;
-    },
     async getCategoriasMain() {
         const cycles = await apiLogin.get(`/api/categoriasEspecificas`);
         return cycles.data;

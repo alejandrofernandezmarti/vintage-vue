@@ -48,8 +48,9 @@ export default {
         return cycles.data.data;
     },
     async createProduct(product) {
-        console.log(product)
         await apiLogin.post(`/api/productoCreate`,product);
-
-    }
+    },
+    async newOrder(products){
+        await apiLogin.post(`/checkout`,products);
+    },
 };

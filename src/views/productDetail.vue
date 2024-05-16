@@ -148,12 +148,12 @@ export default {
         <p>{{product.estado}}</p>
         <br>
         <span v-if="product.tipo === 'Box'">
-          <button v-if="this.selectedQuantity === 0" class="boton btn cartBtn">SELECCIONA UNA CANTIDAD</button>
-          <button v-if="this.selectedQuantity !== 0" @click="agregarAlCarrito" class="boton btn cartBtn">AÑADIR AL CARRITO</button>
+          <button v-if="this.selectedQuantity === 0" class="boton btn ">SELECCIONA UNA CANTIDAD</button>
+          <button v-if="this.selectedQuantity !== 0" @click="agregarAlCarrito" class="boton btn ">AÑADIR AL CARRITO</button>
         </span>
         <span v-if="product.tipo === 'Selected'">
-          <button v-if="enCarrito" class="boton btn cartBtn">AÑADIDO CORRECTAMENTE</button>
-          <button v-if="!enCarrito" @click="agregarAlCarrito" class="boton btn cartBtn">AÑADIR AL CARRITO</button>
+          <button v-if="enCarrito" class="boton btn ">AÑADIDO CORRECTAMENTE</button>
+          <button v-if="!enCarrito" @click="agregarAlCarrito" class="boton btn ">AÑADIR AL CARRITO</button>
         </span>
 
 
@@ -167,6 +167,8 @@ export default {
 <style>
 .btn{
   border: 1px solid #000000 !important;
+  margin-bottom: 100px !important;
+  align-items: center !important;
 }
 .btn:hover{
   background-color: #e5e5e5 !important;
