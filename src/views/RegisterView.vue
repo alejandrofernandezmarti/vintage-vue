@@ -13,6 +13,7 @@ export default {
   },
   data() {
     const validationSchema = yup.object({
+      name: yup.string().trim().required('El nombre es un campo obligatorio').trim().min(2).max(50),
       email: yup.string().trim().required('El correo no puede estar en blanco').email("El email debe de ser válido"),
       password: yup.string().trim().required('La contraseña no puede estar en blanco')
     })
@@ -21,46 +22,33 @@ export default {
       user: {}
     }
   },
-  mounted() {
-    const urlParams = new URLSearchParams(window.location.search)
-    const dataParam = urlParams.get('data')
-    if (dataParam) {
-      let logedUser = JSON.parse(decodeURIComponent(dataParam))
-      this.saveUser(logedUser.token)
-      this.addMessage('success', 'Sesión iniciada')
-      this.$router.push('/')
-    }
-  },
   methods: {
-    ...mapActions(useUserStore, ['saveUser']),
-    loginWithGoogle() {
-      try {
-        window.location.href = 'https://backend.projecteg3.ddaw.es/auth/google/'
-      } catch (error) {
-        console.log(error)
-      }
-    },
-
     async handleLogin() {
+
       try {
-        let logedUser = await login.login(this.user)
-        this.saveUser(logedUser)
-        alert('success', 'Sesión iniciada')
+        console.log(this.user)
+        await login.register(this.user)
         this.$router.push('/')
+        alert('success', 'Sesión iniciada')
       } catch (error) {
         alert('danger', 'Los datos Insertados no son Correctos')
       }
     }
-  }
+  },
 }
 </script>
 <template>
   <div class="  align-items-center mt-5 ">
-    <div class=" text-center row rounded-3 align-items-center g-0">
-      <h4 class="col-12 text-center">BIENVENIDO</h4>
-      <p class="namePrice">INTRODUCE USUARIO Y CONTRASEÑA</p>
-      <Form class="login-form col-12 text-center" @submit="handleLogin" :validation-schema="validationSchema"
+    <div class="  row  align-items-center g-0">
+      <h4 class="col-12 text-center">REGISTRARSE</h4>
+      <Form class="row text-center g-0" @submit="handleLogin" :validation-schema="validationSchema"
         id="login-form">
+        <div>
+          <label for="name" class="fw-bold"></label><br>
+          <Field type="text" name="name" id="name" class="col-12" placeholder="Nombre y Apellidos"
+                 v-model="user.name" />
+          <ErrorMessage class="error" name="name" />
+        </div>
         <div>
           <label for="email"></label>
           <Field type="text" name="email" id="email" class="col-12 mt-3" placeholder="Correo electrónico" v-model="user.email">
@@ -73,31 +61,17 @@ export default {
             v-model="user.password"></Field>
           <ErrorMessage class="error" name="password"></ErrorMessage>
         </div>
-        <div class="row d-flex justify-content-center mt-2 g-0">
-          <button type="submit" class="btn  mt-3 m-2 col-1 btn col-8 col-md-4 col-lg-3">LOGIN</button>
+        <div class="row d-flex justify-content-center mt-2 g-0 ">
+          <button type="submit" class="btn  mt-3 col-8 col-md-4 col-lg-3">REGISTER</button>
         </div>
       </Form>
-      <div class="mt-2">
-        <a href="https://backend.projecteg3.ddaw.es/forgot-password">He olvidado mi contraseña</a>
-      </div>
-      <div>No tienes una cuenta? <a href="/register">Registrate aquí</a></div>
     </div>
   </div>
 </template>
 <style scoped>
-
-
-
-.login-box {
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  width: 90%;
-  max-width: 60%;
-  text-align: center;
+.btn{
+  text-align: center !important;
 }
-
 h1 {
   margin-bottom: 20px;
   color: #333;
@@ -106,7 +80,6 @@ h1 {
 .col-12 {
   margin-top: 3px;
 }
-
 @media (min-width: 769px){
   input[type="text"],
   input[type="password"] {
@@ -143,22 +116,4 @@ a:hover {
   color: rgb(197, 197, 197);
 }
 
-@media (max-width: 768px) {
-  .login-box {
-    max-width: 100%;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .login-box {
-    max-width: 75%;
-  }
-}
-
-@media (max-width: 576px) {
-  .btn-primary {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
 </style>

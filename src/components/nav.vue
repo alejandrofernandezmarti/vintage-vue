@@ -1,7 +1,8 @@
 <script>
 import {mapActions, mapState} from "pinia";
 import {categoriasStore} from "@/stores/categoriasStore.js";
-
+import {useUserStore } from "@/stores/userStore.js";
+import { computed } from 'vue';
 export default {
   data() {
     return {
@@ -23,7 +24,7 @@ export default {
     },
     redirectToCheckout() {
       this.$router.push('/checkout'); // Ajusta la ruta según sea necesario
-    }
+    },
   },
   mounted() {
     this.calcularPrecioTotal()
@@ -32,6 +33,8 @@ export default {
 
   computed: {
     ...mapState(categoriasStore,{carrito: 'carrito',precioCarrito:'precioCarrito'}),
+    ...mapState(useUserStore,{token: 'token'}),
+
   },
 };
 </script>
@@ -55,52 +58,55 @@ export default {
             <div class="offcanvas-body">
               <ul class="list-unstyled " >
                 <li class="mb-1">
-                  <button class="btn d-inline-flex align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#components-collapse" aria-expanded="true" aria-current="true" @click="toggleCollapse">
-                  Categorias<span class="material-symbols-outlined arrow-down" v-if="!collapsed">arrow_drop_down</span>
+                  <button class="btn-xs d-inline-flex align-items-center rounded" data-bs-toggle="collapse" data-bs-target="#components-collapse" aria-expanded="true" aria-current="true" @click="toggleCollapse">
+                  Lotes<span class="material-symbols-outlined arrow-down" v-if="!collapsed">arrow_drop_down</span>
                     <span class="material-symbols-outlined arrow-up" v-else>arrow_drop_up</span>
                   </button>
                   <div class="collapse xs-list" id="components-collapse">
                     <ul class="list-unstyled components">
-                      <li>
-                        <a>Sudaderas</a>
+                      <h6 class="mt-1">Tops</h6>
+                      <li><a href = "/productos/1">Sudaderas</a>
                       </li>
-                      <li>
-                        <a>Jerseys</a>
+                      <li><a href = "/productos/2">Jerseys</a>
                       </li>
-                      <li>
-                        <a>Camisetas</a>
+                      <li><a href = "/productos/3">Camisetas</a>
                       </li>
-                      <li>
-                        <a>Camisas</a>
+                      <li><a href = "/productos/4">Camisas</a>
                       </li>
-                      <li>
-                        <a>Chaquetas</a>
+                      <li><a href = "/productos/5">Chaquetas</a>
                       </li>
-                      <li>
-                        <a>Cazadoras</a>
+                      <li><a href = "/productos/6">Cazadoras</a>
                       </li>
-                      <li>
-                        <a>Pantalones</a>
+                      <h6 class="mt-3">Bottoms</h6>
+                      <li><a href = "/productos/7">Pantalones</a>
                       </li>
-                      <li>
-                        <a>Shorts</a>
+                      <li><a href = "/productos/8">Shorts</a>
                       </li>
+                      <h6 class="mt-3">Complementos</h6>
+                      <li><a href = "/productos/9">Gorras</a></li>
+                      <li><a href = "/productos/10">Bolsos</a></li>
+                      <a href = "/productos" >Ver todos</a>
                     </ul>
                   </div>
                 </li>
                 <li class="mb-1">
-                  <button class="btn d-inline-flex  rounded" >
-                    Ofertas
+                  <button class="btn-xs d-inline-flex" >
+                    <a href="/selected">Selected</a>
                   </button>
                 </li>
                 <li class="mb-1">
-                  <button class="btn d-inline-flex  rounded" >
+                  <button class="btn-xs d-inline-flex" >
                     Nosotros
                   </button>
                 </li>
-                <li class="mb-1" href="/cuenta">
-                  <button class="btn d-inline-flex  rounded" >
-                    Cuenta
+                <li v-if="this.token != null" class="mb-1" >
+                  <button class="btn-xs d-inline-flex" >
+                    <a href="/cuenta">Cuenta</a>
+                  </button>
+                </li>
+                <li v-else class="mb-1" >
+                  <button class="btn-xs d-inline-flex  rounded" >
+                    <a href="/login">Cuenta</a>
                   </button>
                 </li>
               </ul>
@@ -151,8 +157,8 @@ export default {
       <ul class = "navbar-nav">
         <div class="nav-left navbar-nav col-4">
           <li>
-            <a href = "" class = "menu-link">
-              CATEGORIAS
+            <a href = "/productos" class = "menu-link">
+              LOTES
               <span class = "drop-icon">
               <i class = "fas fa-chevron-down"></i>
             </span>
@@ -161,18 +167,24 @@ export default {
               <div class = "sub-menu-item">
                 <h4>Ropa</h4>
                 <ul class="list-unstyled">
-                  <li><a href = "#">Sudaderas</a></li>
-                  <li><a href = "#">Jerseys</a></li>
-                  <li><a href = "#">Camisetas</a></li>
-                  <li><a href = "#">Pantalones</a></li>
-                  <li><a href = "#">Cazadoras</a></li>
+                  <li><a href = "/productos/1">Sudaderas</a></li>
+                  <li><a href = "/productos/2">Jerseys</a></li>
+                  <li><a href = "/productos/3">Camisetas</a></li>
+                  <li><a href = "/productos/4">Camisas</a></li>
+                  <li><a href = "/productos/5">Chaquetas</a></li>
+                  <li><a href = "/productos/6">Cazadoras</a></li>
                 </ul>
               </div>
               <div class = "sub-menu-item">
+                <h4>Pantalones</h4>
+                <ul class="list-unstyled">
+                  <li><a href = "/productos/7">Pantalones</a></li>
+                  <li><a href = "/productos/8">Shorts</a></li>
+                </ul>
                 <h4>Complementos</h4>
                 <ul class="list-unstyled">
-                  <li><a href = "#">Gorras</a></li>
-                  <li><a href = "#">Bolsos</a></li>
+                  <li><a href = "/productos/9">Gorras</a></li>
+                  <li><a href = "/productos/10">Bolsos</a></li>
                 </ul>
               </div>
               <div class = "sub-menu-item">
@@ -182,8 +194,8 @@ export default {
           </li>
 
           <li>
-            <a href = "#" class = "menu-link">
-              OFERTAS
+            <a href = "/selected" class = "menu-link">
+              SELECTED
             </a>
           </li>
           <li>
@@ -199,8 +211,11 @@ export default {
           </li>
         </div>
         <div class="nav-right navbar-nav order-3 justify-content-end col-2">
-          <li class="carrito  " >
+          <li v-if="this.token != null" class="carrito" >
             <a class="align-self-center" href="/cuenta">CUENTA</a>
+          </li>
+          <li v-else class="carrito" >
+            <a class="align-self-center" href="/login">CUENTA</a>
           </li>
           <li class="order-3 carrito  " >
             <a class="align-self-center" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample" ><a>CARRITO</a>
@@ -245,6 +260,13 @@ export default {
 </template>
 
 <style scoped>
+.btn-xs{
+  border: none;
+  font-size: 17px;
+  background-color: white;
+  margin-bottom: 8px;
+  padding-left: 10px;
+}
 .components{
   font-size: 16px;
   margin-left: 30px;
@@ -256,9 +278,10 @@ export default {
   opacity: 0.8;
   transition: all 0.5s ease;
   cursor: pointer;
+  padding-left: 20px;
 }
 .xs-list ul li:hover{
-  padding-left: 14px;
+  padding-left: 35px;
   opacity: 0.9;
 }
 .components li{
@@ -332,6 +355,7 @@ a{
   border-bottom: none;
   padding: 1.7rem 1.8rem 1.7rem 0.8rem;
   font-size: 0.8rem;
+  font-weight: 500;
 }
 .nav-right{
   display: flex;
@@ -345,6 +369,7 @@ a{
   border-bottom: none;
   padding: 1.7rem 1.8rem 1.7rem 0.8rem;
   font-size: 0.8rem;
+  font-weight: 500;
 }
 .nav-left > li:hover .sub-menu{
   display: grid!important;
@@ -359,9 +384,8 @@ a{
   border-bottom-color: #000;
 }
 .nav-left > li > a{
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   display: block;
-  margin: 0.2rem 0;
   border-radius: 1px;
   transition: all 0.4s ease;
 }

@@ -7,7 +7,7 @@ export default {
   data() {
     return {
       productos: [],
-      categorias: [],
+      selected: [],
     }
   },
   components: {
@@ -15,7 +15,7 @@ export default {
   },
   async mounted(){
     this.productos = await productsAxios.productosRandom();
-    this.categorias = await categoriesAxios.getCategoriasMain();
+    this.selected = await categoriesAxios.getCategoriasMain();
   },
   methods: {
 
@@ -53,13 +53,13 @@ export default {
 
 
   <div class="bloque row no-gutters g-0">
-    <a class="titulos col-12"><strong>CATEGORÍAS</strong></a>
+    <a class="titulos col-12"><strong>NUESTRA SELECCIÓN</strong></a>
 
-    <div v-for="categoria in categorias" :key="categoria.id" class="col-6 col-md-4 col-xl-3">
+    <div v-for="selectItem in selected" :key="selectItem.id" class="col-6 col-md-4 col-xl-3">
       <div class="card-category">
-        <img :src="'/categorias/' + categoria.imagen" class="card-img-top" :alt="categoria.nombre">
+        <img :src="'/categorias/' + selectItem.imagen" class="card-img-top" :alt="selectItem.nombre">
         <div class="card-body">
-          <a :href="`/productos/${categoria.id}`" class="name-category">{{ categoria.nombre }}</a>
+          <a :href="`/productos/${selectItem.id}`" class="name-category">{{ selectItem.nombre }}</a>
         </div>
       </div>
     </div>

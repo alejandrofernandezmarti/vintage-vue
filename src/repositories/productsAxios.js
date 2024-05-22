@@ -27,8 +27,22 @@ axios.interceptors.response.use(response => {
 });
 
 export default {
+    async getProducts(url) {
+        try {
+            const response = await axios.get(url);
+            return response.data;
+        } catch (error) {
+            console.error('Error al obtener los productos paginadas:', error)
+            throw error
+        }
+
+    },
     async getAllProducts() {
         const products = await apiLogin.get('/api/productos/');
+        return products.data;
+    },
+    async getAllSelected() {
+        const products = await apiLogin.get('/api/productosSelected/');
         return products.data.data;
     },
     async getProductById(idProduct) {

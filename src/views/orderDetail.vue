@@ -53,18 +53,18 @@ export default {
           <td></td>
           <td>Nombre</td>
           <td>Precio</td>
-          <td>Marca</td>
-          <td>Talla</td>
+          <td>Cantidad</td>
+          <td>Estado</td>
 
         </tr>
         </thead>
         <tbody>
         <tr v-for="product in productos" :key="product.id">
-          <td class="text-muted fila"><img :src="product.producto.imagenes?.url_1" class="exp-img" alt="Producto 1"></td>
-          <td class="text-muted fila align-content-center">{{ product.producto.nombre }}</td>
-          <td class="text-muted fila align-content-center">{{ product.producto.precio }} EUR</td>
-          <td class="text-muted fila align-content-center">{{ product.producto.marca }}</td>
-          <td class="text-muted fila align-content-center">{{ product.producto.talla }}</td>
+          <td class="text-muted fila"><img :src="product.imagen" class="exp-img" alt="Producto 1"></td>
+          <td class="text-muted fila align-content-center">{{ product.nombre }}</td>
+          <td class="text-muted fila align-content-center">{{ product.precio_ud }} EUR</td>
+          <td class="text-muted fila align-content-center">{{ product.cantidad }}</td>
+          <td class="text-muted fila align-content-center">{{ product.estado }}</td>
         </tr>
         </tbody>
       </table>
@@ -89,7 +89,7 @@ export default {
         <tbody>
         <tr>
           <td class="fila text-muted">{{ order.direccion }}</td>
-          <td class="fila text-muted">{{ calcularPrecioTotal(this.productos)}} EUR</td>
+          <td class="fila text-muted">{{ order.importe }} EUR</td>
         </tr>
         </tbody>
       </table>

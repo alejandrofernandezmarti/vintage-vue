@@ -8,21 +8,19 @@ export default {
   data() {
     return {
       sizes: ['XXS', 'XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL'],
+      estados: ['Grado A', 'Grado B', 'Calidad premium'],
+      quantities: [10, 20, 30, 50, 70, 100],
+      selectedQuantity: 0,
+      discountPrice: this.data?.producto?.precio_ud,
       data: reactive({
         producto: {
           nombre: '',
-          precio: 0,
-          id_marca: 0,
+          precio_ud: 0,
           id_categoria: 0,
-        },
-        medidas: {
-          alto:  0,
-          ancho: 0,
-          manga: 0,
-        },
-        talla:{
-          etiqueta: '',
-          real:'',
+          tipo: '',
+          cantidad: 0,
+          descripcion: '',
+          estado:'',
         },
         imagenes: {
           url_1: '',
@@ -36,45 +34,57 @@ export default {
     };
   },
   computed: {
-    ...mapState(categoriasStore,{categories: 'categories',brands:'brands'}),
+    ...mapState(categoriasStore,{categories: 'categories'}),
   },
   methods: {
     async submitForm() {
       await productsAxios.createProduct(this.data)
+      this.$router.push('/')
     },
-   /* handleImageUpload(index) {
-      const inputId = `url_${index}`;
-      const input = document.getElementById(inputId);
-      const file = input.files[0];
-
-      if (file) {
-        // Obtener el nombre del archivo
-        const fileName = file.name;
-
-        // Crear un objeto URL para mostrar una vista previa de la imagen
-        const imageUrl = URL.createObjectURL(file);
-
-        // Asignar el nombre del archivo a la propiedad correspondiente
-        this.data.imagenes[inputId] = fileName;
-
-        // Asignar la URL de la imagen a otra propiedad
-        this.data.imagenes[`preview_${inputId}`] = imageUrl;
-      } else {
-        // Si no se selecciona ningún archivo, borrar tanto el nombre del archivo como la URL de la imagen
-        this.data.imagenes[inputId] = '';
-        this.data.imagenes[`preview_${inputId}`] = '';
-      }
-    }, */
     handleImageUpload(index) {
       const fileInput = document.getElementById(`url_${index}`);
       const file = fileInput.files[0];
       const reader = new FileReader();
 
       reader.onload = () => {
-        this.data.imagenes[`url_${index}`] = reader.result; // Modifica la propiedad directamente
+        this.data.imagenes[`url_${index}`] = reader.result;
       };
 
       reader.readAsDataURL(file);
+    },
+    agregarAlCarrito() {
+      if (this.data.producto.tipo === 'Selected'){
+        categoriasStore().agregarAlCarrito(this.product);
+      }else {
+        categoriasStore().agregarBoxCarrito(this.data.producto,this.selectedQuantity,this.discountPrice);
+      }
+
+    },
+    selectQuantity(event,quantity) {
+      const cantidades = document.querySelectorAll('.option');
+
+      cantidades.forEach(cantidad => {
+        cantidad.classList.remove('selected');
+      });
+
+      event.target.classList.add('selected');
+      this.selectedQuantity = quantity;
+
+      let descuento = 0;
+
+      if (this.selectedQuantity === 20) {
+        descuento = 0.04;
+      } else if (this.selectedQuantity === 30) {
+        descuento = 0.08;
+      } else if (this.selectedQuantity === 50) {
+        descuento = 0.12;
+      } else if (this.selectedQuantity === 70) {
+        descuento = 0.16;
+      } else if (this.selectedQuantity === 100) {
+        descuento = 0.20;
+      }
+
+      this.discountPrice = (this.data.producto?.precio_ud * (1 - descuento)).toFixed(2);
     }
   }
 };
@@ -88,38 +98,44 @@ export default {
         <input type="text" id="nombre" v-model="data.producto.nombre" required>
       </div>
       <div class="form-group">
-        <label for="precio">Precio:</label>
-        <input type="number" id="precio" v-model="data.producto.precio" required>
+        <label for="descripcion">Descripcion:</label>
+        <input type="text" id="descripcion" v-model="data.producto.descripcion" required>
       </div>
       <div class="form-group">
-        <label for="marca">Marca:</label>
-        <select id="marca" v-model="data.producto.id_marca" required>
-          <option v-for="(marca, index) in brands" :key="index" :value="marca.id">{{ marca.nombre }}</option>
+        <label for="precio_ud">Precio:</label>
+        <input type="number" step="0.01" id="precio_ud" v-model="data.producto.precio_ud" required>
+      </div>
+      <div class="form-group">
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" v-model="data.producto.tipo" required>
+          <option  value="Selected">Box / Selected</option>
+          <option  value="Box" >Lote </option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="estado">Estado:</label>
+        <select id="estado" v-model="data.producto.estado" required>
+          <option disabled value="">Selecciona un estado</option>
+          <option v-for="estado in estados" :value="estado">{{ estado }}</option>
         </select>
       </div>
       <div class="form-group">
         <label for="categoria">Categoría:</label>
         <select id="categoria" v-model="data.producto.id_categoria" required>
+          <option disabled value="">Selecciona una categoria</option>
           <option v-for="(categoria, index) in categories" :key="index" :value="categoria.id">{{ categoria.nombre }}</option>
         </select>
       </div>
-      <div class="form-group">
-        <label for="medidas">Medidas (cm):</label>
-        <input type="number" id="alto" v-model="data.medidas.alto" placeholder="Alto" required>
-        <input type="number" id="ancho" v-model="data.medidas.ancho" placeholder="Ancho" required>
-        <input type="number" id="manga" v-model="data.medidas.manga" placeholder="Manga" required>
-      </div>
-      <div class="form-group">
-        <label for="medidas">Tallas:</label><br><br>
-        <strong>Real </strong>
-        <select id="tallaReal" v-model="data.talla.real" required>
-          <option disabled value="">Selecciona una talla</option>
-          <option v-for="size in sizes" :value="size">{{ size }}</option>
-        </select><br><br>
-        <strong>  Etiqueta </strong>
-        <select id="tallaEtiqueta" v-model="data.talla.etiqueta" required>
-          <option disabled value="">Selecciona una talla</option>
-          <option v-for="size in sizes" :value="size">{{ size }}</option>
+      <div v-if="this.data.producto.tipo === 'Selected'" class="form-group">
+        <label for="cantidad">Cantidad:</label>
+        <select id="cantidad" v-model="data.producto.cantidad" required>
+          <option value="0" selected>0</option>
+          <option value="10">10</option>
+          <option value="20">20</option>
+          <option value="30">30</option>
+          <option value="50">50</option>
+          <option value="70">70</option>
+          <option value="100">100</option>
         </select>
       </div>
       <div class="form-group">
@@ -199,7 +215,7 @@ export default {
       </div>
     </section>
 
-    <div class="col-12 col-md-8" id="img-grande">
+    <div class="col-12 col-md-7" id="img-grande">
       <div class="fotosDiv row g-0">
         <div  class="col-12 col-md-6" ><img :src="data.imagenes.url_1" class="card-img-top" alt="Detalle del Producto"></div>
         <div  class="col-12 col-md-6" ><img :src="data.imagenes.url_2" class="card-img-top" alt="Detalle del Producto"></div>
@@ -210,22 +226,38 @@ export default {
       </div>
     </div>
 
-    <div class="information col-12 col-md-4">
+    <div class="information col-12 col-md-5">
       <h2 class="productName" >{{data.producto.nombre}}</h2><br>
-      <p class="text-muted">TALLA: {{data.talla.real}}</p>
-      <p class="text-muted">Marca: {{data.producto.id_marca}}</p>
-      <p class="text-muted">Precio: {{data.producto.precio}} €</p>
-      <br>
-      <h5 class="productName">Medidas: </h5>
-      <p class="text-muted">Alto: {{data.medidas?.alto}} cm</p>
-      <p class="text-muted">Ancho: {{data.medidas?.ancho}} cm</p>
-      <p class="text-muted">Mangas: {{data.medidas?.manga}} cm</p><br>
 
-      <h5 class="productName">Estado producto</h5>
-      <p>{{data.producto.id_categoria}}</p>
+      <div v-if="data.producto.tipo === 'Box' " class="cantidades row">
+        <h4 class="mb-4">Cantidad:</h4>
+        <div class="custom-select justify-content-center">
+          <div v-for="quantity in quantities" :key="quantity"  >
+            <div  class="col-2"><span class="option numberBorder" @click="selectQuantity($event,quantity)">{{ quantity }}</span></div>
+          </div>
+        </div>
+      </div>
+      <div v-if="data.producto.tipo === 'Selected' " class="cantidades ">
+        <h4 class="col-6">Cantidad: {{data.producto.cantidad}}</h4>
+      </div>
+
+      <p class="text-muted"> {{data.producto.descripcion}}</p>
+      <p class="text-muted">Precio Ud. <s v-if="this.selectedQuantity >= 20"> {{data.producto.precio_ud}} € </s><span v-if="this.selectedQuantity <= 10"> {{data.producto.precio_ud}} € </span></p>
+      <p  v-if="this.selectedQuantity >= 20" class="text-muted">Precio oferta: {{discountPrice}} €</p>
       <br>
-      <button v-if="!enCarrito" @click="agregarAlCarrito" class="boton btn btn-primary">AÑADIR AL CARRITO</button>
-      <button v-if="enCarrito" class="boton btn btn-primary">AÑADIDO CORRECTAMENTE</button>
+      <h5 class="productName">Estado producto</h5>
+      <p>{{data.producto.estado}}</p>
+      <br>
+      <span v-if="data.producto.tipo === 'Box'">
+          <button v-if="this.selectedQuantity === 0" class="boton btn ">SELECCIONA UNA CANTIDAD</button>
+          <button v-if="this.selectedQuantity !== 0" @click="agregarAlCarrito" class="boton btn ">AÑADIR AL CARRITO</button>
+        </span>
+      <span v-if="data.producto.tipo === 'Selected'">
+          <button  @click="agregarAlCarrito" class="boton btn ">AÑADIR AL CARRITO</button>
+        </span>
+
+
+
     </div>
 
   </div>

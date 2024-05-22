@@ -9,6 +9,8 @@ import login from "@/views/LoginView.vue";
 import index from "@/views/main.vue"
 import orderDetail from "@/views/orderDetail.vue";
 import checkout from "@/views/checkout.vue"
+import register from "@/views/RegisterView.vue"
+import selectedList from "@/views/selectedList.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -27,6 +29,11 @@ const router = createRouter({
       name: 'Nuestros productos',
       component: productList,
       props: true
+    },
+    {
+      path: '/selected',
+      name: 'Nuestras selecciones',
+      component: selectedList,
     },
     {
       path: '/categorias',
@@ -51,6 +58,10 @@ const router = createRouter({
       path: '/login',
       name: 'Login',
       component: login,
+    },{
+      path: '/register',
+      name: 'Register',
+      component: register,
     },{
       path: '/order/:id',
       name: 'Compra',

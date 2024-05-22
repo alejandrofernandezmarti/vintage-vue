@@ -32,14 +32,17 @@ export default{
         return token.data;
     },
     async login(user) {
-        console.log(user)
-        // eslint-disable-next-line no-useless-catch
         try {
             const token = await apiLogin.post(`/api/login/?email=${user.email}&password=${user.password}`)
             return token.data
         } catch (error) {
             throw error
         }
+    },
+    async register(user) {
+        const userRegistered = await apiLogin.post(`/api/register`,user)
+        return userRegistered.data.data
+
     }
 }
 

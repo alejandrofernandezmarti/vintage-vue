@@ -72,12 +72,9 @@ export const categoriasStore = defineStore('categoriasStore', {
             if (!this.productosCargados) {
                 const productosGuardados = localStorage.getItem('productos');
                 if (productosGuardados) {
-                    // Si hay productos guardados en el localStorage, cárgalos en el estado de Vuex
                     this.productos = JSON.parse(productosGuardados);
                     this.productosCargados = true;
                 } else {
-                    // Si no hay productos guardados, haz la petición para obtenerlos y guárdalos en el localStorage
-                    // Supongamos que productsAxios.getAllProducts() devuelve una promesa con los productos
                     productsAxios.getAllProducts().then((productos) => {
                         this.productos = productos;
                         this.productosCargados = true;

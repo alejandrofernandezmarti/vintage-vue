@@ -2,8 +2,8 @@ import usersAxios from '@/repositories/usersAxios'
 import { defineStore } from 'pinia'
 export const useUserStore = defineStore('userStore', {
   state: () => ({
-    token: null,
-    user: null
+    token: localStorage.getItem('token') || null,
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
   }),
 
 
@@ -16,6 +16,7 @@ export const useUserStore = defineStore('userStore', {
     },
     logout() {
       this.token = null
+      this.user = null
       localStorage.removeItem('token')
       localStorage.removeItem('user')
     },
@@ -28,6 +29,9 @@ export const useUserStore = defineStore('userStore', {
           console.log(error)
         }
       }
+    },
+    isLoggedIn() {
+      return this.token != null
     },
 
   }

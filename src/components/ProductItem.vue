@@ -7,11 +7,11 @@ export default {
     obtenerPrimeraPalabra(nombre) {
       return nombre.split(' ')[0];
     },
-    mostrarPrecioSinDecimales(precio) {
-      return parseInt(precio);
+    formatPrice(value) {
+      return value;
+      return value.toFixed(2);
     },
     redirectProduct() {
-      // Redirecciona al usuario al producto
       this.$router.push(`/product/${this.product.id}`);
     }
   }
@@ -28,7 +28,7 @@ export default {
       <div class="card-body row g-0">
         <a :href="`/product/${product.id}`" class="nameProduct text-uppercase col-8">{{ product.nombre }}</a>
         <div class="col-4">
-          <a :href="`/product/${product.id}`" class="namePrice mr-2">{{ product.precio_ud}} EUR  </a>
+          <a :href="`/product/${product.id}`" class="namePrice mr-2">{{ formatPrice(product.precio_ud) }} EUR</a>
 
         </div>
       </div>
@@ -40,8 +40,4 @@ export default {
 .namePrice{
   justify-content: left;
 }
-.descuento{
-  padding-left: 10px;
-}
-
 </style>
