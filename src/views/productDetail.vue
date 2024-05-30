@@ -186,9 +186,7 @@ export default {
 
 .option {
   cursor: pointer;
-  border: solid 1px;
   padding: 8px 10px;
-  border-radius: 10px;
   font-size: 15px;
   margin: 0 10px;
 }
@@ -199,8 +197,8 @@ export default {
 
 .selected {
   background-color: #b7b7b7;
+  border-bottom: solid 1px;
   color: #ffffff;
-  border: 1px solid;
 }
 
 .selected:hover {
@@ -210,9 +208,8 @@ export default {
   text-align: center;
 }
 .numberBorder{
-  border: solid 1px;
+  border-bottom: solid 1px;
   padding: 8px 10px;
-  border-radius: 10px;
   font-size: 20px;
 }
 </style>

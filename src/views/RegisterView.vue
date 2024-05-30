@@ -19,19 +19,21 @@ export default {
     })
     return {
       validationSchema,
-      user: {}
+      user: {},
+      errorMessage: '',
     }
   },
   methods: {
+    ...mapActions(useUserStore, ['saveUser']),
     async handleLogin() {
-
       try {
-        console.log(this.user)
         await login.register(this.user)
+        let logedUser = await login.login(this.user)
+        this.saveUser(logedUser)
         this.$router.push('/')
-        alert('success', 'Sesión iniciada')
       } catch (error) {
-        alert('danger', 'Los datos Insertados no son Correctos')
+        let errorMessage = JSON.parse(error.request.response)
+        this.errorMessage = errorMessage.message
       }
     }
   },
@@ -61,6 +63,9 @@ export default {
             v-model="user.password"></Field>
           <ErrorMessage class="error" name="password"></ErrorMessage>
         </div>
+        <div class="mt-2" v-if="errorMessage">
+          <p class="error">{{ errorMessage }}</p>
+        </div>
         <div class="row d-flex justify-content-center mt-2 g-0 ">
           <button type="submit" class="btn  mt-3 col-8 col-md-4 col-lg-3">REGISTER</button>
         </div>
@@ -69,6 +74,9 @@ export default {
   </div>
 </template>
 <style scoped>
+.error{
+  color: #e80000 !important;
+}
 .btn{
   text-align: center !important;
 }

@@ -31,18 +31,6 @@
 .card-product {
     border: solid 1px white;
 }
-/* .card-product:hover {
-    animation: 0.2s flash 0.5;
-
- }
-
-@keyframes flash
-{
-	10% { opacity: 0.5; }
-	30% { opacity: 0; }
-}   */
-
-
 
 /*Carrusel de imágenes */
 section{
@@ -50,11 +38,9 @@ section{
 }
 .img-carousel {
     aspect-ratio: 16/17;
-    object-fit: cover; /* Mantiene la proporción y cubre el área designada */
+    object-fit: cover;
     width: 100%;
-
 }
-
 
 .card-product img{
     width: 100%;
@@ -71,7 +57,6 @@ section{
 .card-category{
     border: solid white;
     text-align: center;
-
 }
 .nameProduct{
     text-align: left;
@@ -84,7 +69,6 @@ section{
     font-family:  Helvetica, serif;
     color: black;
     font-size: 15px;
-
 }
 .name-category{
     text-align: center;
@@ -93,8 +77,7 @@ section{
 }
 .card-img-top {
     aspect-ratio: 16/17;
-    object-fit: cover; /* Mantiene la proporción y cubre el área designada */
-
+    object-fit: cover;
 }
 .botonMain{
     margin-left: 40%;
@@ -115,8 +98,6 @@ section{
 .fotosDiv{
     padding: 2% 5% 5% 2%;
 }
-
-
 .information{
     padding-top: 7%;
 }
@@ -128,56 +109,6 @@ section{
     border-radius: 10px;
 }
 
-
-/* ------------------------------------------------- filtros formulario -------------------------------------*/
-#toggleFiltersBtn{
-    width: 80%;
-    height: 40px;
-    border-radius: 20px;
-}
-#ordenarPor{
-    float: right;
-    height: 40px;
-    background-color: #fff;
-    border: 1px solid #ccc;
-    padding: 0.5rem;
-    font-size: 16px;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-}
-.options{
-    padding: 1% 4%;
-}
-.filtrosForm{
-    padding: 5% 3% 0 5%;
-    border-right: solid;
-}
-.filtrosForm legend{
-    padding-top: 10%;
-}
-.filtros div div{
-    border-bottom: solid 1px;
-}
-.submit{
-    margin-top: 10px;
-    float: center;
-}
-.linea-filtro{
-    padding: 5px;
-    font-size: 20px;
-}
-.linea-filtro input{
-    float: right;
-    margin-top: 4%
-}
-.btn-filtro{
-    margin-top: 10%;
-    margin-left: 20%;
-    background-color: rgb(212, 212, 212);
-    width: 60%;
-    border-radius: 10px;
-}
 
 /*  ------------------------------------------------------ css nav    ------------------------------------------*/
 *{
@@ -278,13 +209,6 @@ body{
     margin-bottom: 0 !important;
     background-color: #fff;
 }
-.check-left{
-
-}
-.check-right{
-
-
-}
 
 /************************** navbar-nav-right   **************************************  */
 @media screen and (min-width: 992px){
@@ -293,7 +217,6 @@ body{
         align-items: center;
         justify-content: right;
         flex-direction: row;
-
     }
     .navbar-nav-right > li > a{
         border-bottom: none;
@@ -443,9 +366,6 @@ body{
 @media screen and (max-width: 667px){
     .options{
         margin-top: 20%;
-    }
-    .linea-filtro input{
-        margin-top: 2%
     }
     section{
         display: block;

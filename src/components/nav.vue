@@ -47,7 +47,7 @@ export default {
         <span class="fas fa-bars options" data-bs-toggle="offcanvas" href="#offcanvasCat" role="button" aria-controls="offcanvasExample"></span>
       </div>
       <div class="col-4 xs-logo ">
-        <a href="/">Vintage</a>
+        <a href="/"><img class="logo" src="/logos/logoPeninsula2.jpeg"></a>
 
         <div class="offcanvas-wrapper">
           <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasCat" aria-labelledby="offcanvasExampleLabel">
@@ -130,19 +130,19 @@ export default {
                 <img class="col-4 img-carrito" :src="producto.imagenes?.url_1" alt="Producto">
                 <div class="col-8">
                   <p class="carrito-text">{{ producto.nombre }}</p>
-                  <p class="carrito-text">{{ producto.precio }} EUR</p>
+                  <p class="carrito-text">{{ producto.precio_ud }} EUR</p>
 
                   <div class="row ">
-                    <p class="carrito-text col-6">Talla: {{ producto.talla }}</p>
+                    <p class="carrito-text col-6">Cantidad: {{ producto.cantidad }}</p>
                     <a class="underlined col-6 btn-delete" @click="eliminarDelCarrito(index)">Eliminar</a>
                   </div>
                 </div>
 
               </div>
               <div class="row" id="totalPrice">
-                <a class="col-3 total">TOTAL</a>
+                <a class="col-3">TOTAL</a>
                 <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
-                <button class="checkout-button" data-bs-toggle="offcanvas" @click="redirectToCheckout">CHECKOUT</button>
+                <button class="checkout-button" data-bs-toggle="offcanvas"  @click="redirectToCheckout">CHECKOUT</button>
               </div>
             </div>
           </div>
@@ -207,7 +207,7 @@ export default {
 
         <div class = "d-none d-sm-block brand-and-icon order-1  order-md-2 col-6">
           <li >
-            <a href = "/" class = "navbar-brand xs-logo">VINTAGE</a>
+            <a href = "/" class = "navbar-brand xs-logo"><img class="logo" src="/logos/logoPeninsula2.jpeg"></a>
           </li>
         </div>
         <div class="nav-right navbar-nav order-3 justify-content-end col-2">
@@ -260,6 +260,9 @@ export default {
 </template>
 
 <style scoped>
+.logo{
+  width: 70%;
+}
 .btn-xs{
   border: none;
   font-size: 17px;

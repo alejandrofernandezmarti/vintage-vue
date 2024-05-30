@@ -4,11 +4,7 @@ export default {
     product: {}
   },
   methods: {
-    obtenerPrimeraPalabra(nombre) {
-      return nombre.split(' ')[0];
-    },
     formatPrice(value) {
-      return value;
       return value.toFixed(2);
     },
     redirectProduct() {

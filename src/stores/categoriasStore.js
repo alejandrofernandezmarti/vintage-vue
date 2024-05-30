@@ -6,7 +6,8 @@ export const categoriasStore = defineStore('categoriasStore', {
     state()  {
         return {
             categories: [],
-            carrito: JSON.parse(localStorage.getItem('carrito')) || [],
+            carrito: JSON.parse(localStorage.getItem('carrito')) || [] ,
+            carritoStorage : JSON.parse(localStorage.getItem('carrito')) || [],
             precioCarrito: 0,
             precioEnvio: 0,
             precioTotal: 0,
@@ -15,6 +16,21 @@ export const categoriasStore = defineStore('categoriasStore', {
         }
     },
     actions: {
+        async loadCarrito(){
+            const products =  JSON.parse(localStorage.getItem('carrito')) || [];
+            const productsMap = await Promise.all(products.map(pr => productsAxios.getProductById(pr.id)));
+            this.carrito = []
+            products.forEach((pr, index) => {
+                const prBdd = productsMap[index];
+                if ((prBdd.tipo === 'Selected' && !prBdd.vendido) || (prBdd.tipo === 'Box' && prBdd.activo)) {
+                    this.carrito.push(pr);
+                }
+
+            });
+            this.calcularPrecioTotal();
+            this.calculadoraEnvio();
+            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+        },
         async loadCategorias() {
             try {
                 this.categories = await CategoriesAxios.getAllCategories()
@@ -23,7 +39,17 @@ export const categoriasStore = defineStore('categoriasStore', {
             }
         },
         agregarAlCarrito(producto) {
-            this.carrito.push(producto);
+            const productoCarrito = {
+                id: producto.id,
+                nombre: producto.nombre,
+                cantidad: producto.cantidad,
+                imagenes: { url_1: producto.imagenes.url_1 },
+                descripcion: producto.descripcion,
+                tipo: producto.tipo,
+                precio_env : producto.precio_env,
+                precio_ud: producto.precio_ud
+            };
+            this.carrito.push(productoCarrito);
             localStorage.setItem('carrito', JSON.stringify(this.carrito));
             this.calcularPrecioTotal();
             this.calculadoraEnvio();
@@ -33,7 +59,7 @@ export const categoriasStore = defineStore('categoriasStore', {
                 id: producto.id,
                 nombre: producto.nombre,
                 cantidad: cantidad,
-                imagenes: producto.imagenes,
+                imagenes: { url_1: producto.imagenes.url_1 },
                 descripcion: producto.descripcion,
                 tipo: producto.tipo,
                 precio_env : producto.precio_env,
@@ -85,6 +111,5 @@ export const categoriasStore = defineStore('categoriasStore', {
                 }
             }
         },
-
-    }
+    },
 })

@@ -23,7 +23,7 @@ export default {
   },
   methods: {
     async loadProducts() {
-      const productsBase = await productsAxios.getAllProducts();
+      const productsBase = await productsAxios.getLotes();
       this.nextUrl = productsBase.links?.next;
       console.log(this.nextUrl);
       this.productos = productsBase.data;
@@ -61,6 +61,13 @@ export default {
 .btn-ver-mas {
   padding: 10px 20px;
   font-size: 16px;
+  background-color: #f5f5f5;
+  border: 1px solid;
+  border-radius: 5px;
+}
+.btn-ver-mas:hover {
+  background-color: #444444;
+  color: white;
 }
 .linea-filtro a {
   display: inline-block;

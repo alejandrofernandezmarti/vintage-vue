@@ -6,6 +6,7 @@ import { mapActions } from 'pinia'
 import * as yup from 'yup'
 
 export default {
+
   components: {
     Form,
     Field,
@@ -18,7 +19,8 @@ export default {
     })
     return {
       validationSchema,
-      user: {}
+      user: {},
+      errorMessage: '',
     }
   },
   mounted() {
@@ -33,22 +35,14 @@ export default {
   },
   methods: {
     ...mapActions(useUserStore, ['saveUser']),
-    loginWithGoogle() {
-      try {
-        window.location.href = 'https://backend.projecteg3.ddaw.es/auth/google/'
-      } catch (error) {
-        console.log(error)
-      }
-    },
-
     async handleLogin() {
       try {
         let logedUser = await login.login(this.user)
-        this.saveUser(logedUser)
-        alert('success', 'Sesión iniciada')
+         await this.saveUser(logedUser)
         this.$router.push('/')
       } catch (error) {
-        alert('danger', 'Los datos Insertados no son Correctos')
+        let errorMessage = JSON.parse(error.request.response)
+        this.errorMessage = errorMessage.message
       }
     }
   }
@@ -73,6 +67,9 @@ export default {
             v-model="user.password"></Field>
           <ErrorMessage class="error" name="password"></ErrorMessage>
         </div>
+        <div class="mt-2" v-if="errorMessage">
+          <p class="error">{{ errorMessage }}</p>
+        </div>
         <div class="row d-flex justify-content-center mt-2 g-0">
           <button type="submit" class="btn  mt-3 m-2 col-1 btn col-8 col-md-4 col-lg-3">LOGIN</button>
         </div>
@@ -85,19 +82,9 @@ export default {
   </div>
 </template>
 <style scoped>
-
-
-
-.login-box {
-  padding: 20px;
-  background: #fff;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  width: 90%;
-  max-width: 60%;
-  text-align: center;
+.error{
+  color: #e80000 !important;
 }
-
 h1 {
   margin-bottom: 20px;
   color: #333;
@@ -143,22 +130,4 @@ a:hover {
   color: rgb(197, 197, 197);
 }
 
-@media (max-width: 768px) {
-  .login-box {
-    max-width: 100%;
-  }
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .login-box {
-    max-width: 75%;
-  }
-}
-
-@media (max-width: 576px) {
-  .btn-primary {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-}
 </style>

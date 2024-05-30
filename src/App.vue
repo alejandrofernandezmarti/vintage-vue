@@ -1,22 +1,24 @@
 <script >
 import NavBar from '@/components/nav.vue'
+import Foot from '@/components/footer.vue'
 import {categoriasStore} from "@/stores/categoriasStore.js";
 import {mapActions} from "pinia";
 export default {
   components: {
+    Foot,
     NavBar
   },
   async mounted() {
     try {
       await this.loadCategorias()
-      await this.cargarProductos()
+      await this.loadCarrito()
     } catch (error) {
       console.log(error)
     }
   },
 
   methods: {
-    ...mapActions(categoriasStore, ['loadCategorias','cargarProductos']),
+    ...mapActions(categoriasStore, ['loadCategorias','cargarProductos','loadCarrito']),
   }
 }
 </script>
@@ -38,6 +40,7 @@ export default {
   <div class="content">
     <nav-bar></nav-bar>
     <router-view></router-view>
+    <foot></foot>
   </div>
 
   </body>

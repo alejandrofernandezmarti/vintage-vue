@@ -5,8 +5,6 @@ import { createApp } from 'vue'
 import VueStripeElementPlus from 'vue-stripe-elements-plus'
 import App from './App.vue'
 
-
-
 import 'bootstrap/dist/css/bootstrap.min.css'; // Importa los estilos de Bootstrap versión 5.1.3
 import 'bootstrap'; // Importa los componentes y utilidades de Bootstrap
 import 'jquery/dist/jquery.slim.min.js'; // Importa jQuery slim

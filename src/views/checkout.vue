@@ -10,13 +10,13 @@ export default {
   },
 
   mounted() {
-    this.calculadoraEnvio()
+    this.loadCarrito()
   },
   computed: {
     ...mapState(categoriasStore,{carrito: 'carrito',precioCarrito:'precioCarrito',precioEnvio:'precioEnvio',total:'precioTotal'}),
   },
   methods:{
-    ...mapActions(categoriasStore, ['calculadoraEnvio']),
+    ...mapActions(categoriasStore, ['loadCarrito']),
   }
 };
 </script>

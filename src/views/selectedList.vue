@@ -25,12 +25,6 @@ export default {
 
     async loadProducts() {
       this.productosSelected = await productsAxios.getAllSelected();
-      console.log(this.productos)
-     /*if (this.productos.length < 1) {
-        this.productosSelected = await productsAxios.getAllSelected();
-      } else {
-        this.productosSelected = this.productos.filter(producto => producto.tipo === 'Selected');
-      }*/
     },
   },
 

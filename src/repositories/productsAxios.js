@@ -41,6 +41,10 @@ export default {
         const products = await apiLogin.get('/api/productos/');
         return products.data;
     },
+    async getLotes() {
+        const products = await apiLogin.get('/api/productosLotes/');
+        return products.data;
+    },
     async getAllSelected() {
         const products = await apiLogin.get('/api/productosSelected/');
         return products.data.data;
