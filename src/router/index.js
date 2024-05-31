@@ -11,6 +11,10 @@ import orderDetail from "@/views/orderDetail.vue";
 import checkout from "@/views/checkout.vue"
 import register from "@/views/RegisterView.vue"
 import selectedList from "@/views/selectedList.vue";
+import privacy from "@/views/privacy.vue";
+import legal from "@/views/avisoLegal.vue";
+import envios from "@/views/envios.vue";
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -73,6 +77,22 @@ const router = createRouter({
       name: 'Checkout',
       component: checkout,
     },
+    {
+      path: '/privacy',
+      name: 'Política de privacidad',
+      component: privacy,
+    },
+    {
+      path: '/aviso-legal',
+      name: 'Aviso Legal',
+      component: legal,
+    },
+    {
+      path: '/politica-envios',
+      name: 'Politica de envio',
+      component: envios,
+    },
+
   ]
 })
 

@@ -21,6 +21,9 @@ export default {
       const year = date.getFullYear();
       return `${day}-${month}-${year}`;
     },
+    priceFixed(price){
+      return price.toFixed(2);
+    },
     calcularPrecioTotal(compras) {
       let total = 0;
       compras.forEach(compra => {
@@ -62,7 +65,7 @@ export default {
         <tr v-for="product in productos" :key="product.id">
           <td class="text-muted fila"><img :src="product.imagen" class="exp-img" alt="Producto 1"></td>
           <td class="text-muted fila align-content-center">{{ product.nombre }}</td>
-          <td class="text-muted fila align-content-center">{{ product.precio_ud }} EUR</td>
+          <td class="text-muted fila align-content-center">{{ priceFixed(product.precio_ud) }} EUR</td>
           <td class="text-muted fila align-content-center">{{ product.cantidad }}</td>
           <td class="text-muted fila align-content-center">{{ product.estado }}</td>
         </tr>
