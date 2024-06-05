@@ -53,9 +53,14 @@ export default {
         const product = await apiLogin.get(`/api/productos/${idProduct}`);
         return product.data.data;
     },
-    async filtrarProductos(filtros) {
-        const cycles = await apiLogin.post(`/api/productosFiltrados`,filtros);
-        return cycles.data.data;
+    async getCarrito(productos) {
+        try {
+            const response = await apiLogin.post('/api/getCarrito', { products: productos });
+            return response.data.carrito;
+        } catch (error) {
+            console.error('Error al obtener el carrito del backend:', error);
+            throw error;
+        }
     },
     async productsByCategoria(id) {
         const cycles = await apiLogin.get(`/api/productos/categoria/${id}`);

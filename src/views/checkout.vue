@@ -2,21 +2,33 @@
 import {mapActions, mapState} from "pinia";
 import {categoriasStore} from "@/stores/categoriasStore.js";
 import productsAxios from "@/repositories/productsAxios.js";
+import { useUserStore } from '@/stores/userStore.js';
+import usersAxios from "@/repositories/usersAxios.js";
+
 export default {
   data() {
     return {
-      productosJSON: ''
+      productosJSON: '',
+      user: {},
     };
   },
 
-  mounted() {
+  async mounted() {
     this.loadCarrito()
+    this.user = await usersAxios.getUserInfo()
   },
   computed: {
     ...mapState(categoriasStore,{carrito: 'carrito',precioCarrito:'precioCarrito',precioEnvio:'precioEnvio',total:'precioTotal'}),
+    ...mapState(useUserStore,{token: 'token'}),
+    if(){
+
+    }
   },
   methods:{
-    ...mapActions(categoriasStore, ['loadCarrito']),
+    ...mapActions(categoriasStore, ['loadCarrito','vaciarCarrito']),
+    vaciarCart(){
+      this.vaciarCarrito()
+    }
   }
 };
 </script>
@@ -48,7 +60,9 @@ export default {
 
       <form ref="form" action="http://127.0.0.1:8000/checkout" method="POST">
         <input type="hidden" name="productos[]" v-for="(producto, index) in carrito" :key="index" :value="JSON.stringify(producto)">
-        <button type="submit" class="align-content-center payBtn">CONTINUAR CON PAGO Y ENVÍO</button>
+        <input type="hidden" name="email" :value="this.user.email">
+        <input type="hidden" name="id" :value="this.user.id">
+        <button type="submit" @click="this.vaciarCart()" class="align-content-center payBtn">CONTINUAR CON PAGO Y ENVÍO</button>
       </form>
     </div>
 

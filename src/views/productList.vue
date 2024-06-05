@@ -61,8 +61,9 @@ export default {
 .btn-ver-mas {
   padding: 10px 20px;
   font-size: 16px;
-  background-color: #f5f5f5;
-  border: 1px solid;
+  background-color: #fffefe;
+  border: 2px solid black;
+  color: black;
   border-radius: 5px;
 }
 .btn-ver-mas:hover {

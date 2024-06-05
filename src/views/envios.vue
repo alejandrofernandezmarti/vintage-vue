@@ -80,7 +80,7 @@
       No nos hacemos responsables de daños o pérdidas ocasionados durante el envío de la devolución.
     </p>
     <p>Si tienes alguna pregunta adicional sobre nuestra política de devoluciones, no dudes en contactarnos a través del +34622050341.</p><br>
-    <h6><strong>Excepciones</strong></h6>
+    <h6><strong>Jurisdicción</strong></h6>
     <p>
       La relación entre usuario y proveedor se regirá por la normativa vigente y de aplicación en España.
       En caso de discrepancia entre las partes, éstas podrán someter sus conflictos a arbitraje o acudir a la jurisdicción ordinaria, de acuerdo con las normas aplicables sobre competencia judicial.

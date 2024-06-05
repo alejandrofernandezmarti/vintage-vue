@@ -171,7 +171,8 @@ export default {
   align-items: center !important;
 }
 .btn:hover{
-  background-color: #e5e5e5 !important;
+  background-color: #424242 !important;
+  color: #eaeaea !important;
 }
 .cantidades{
   display: flex;

@@ -32,7 +32,7 @@ export default {
 
 
   computed: {
-    ...mapState(categoriasStore,{carrito: 'carrito',precioCarrito:'precioCarrito'}),
+    ...mapState(categoriasStore,{carrito: 'carrito',precioTotal:'precioTotal'}),
     ...mapState(useUserStore,{token: 'token'}),
 
   },
@@ -141,7 +141,7 @@ export default {
               </div>
               <div class="row" id="totalPrice">
                 <a class="col-3">TOTAL</a>
-                <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
+                <a class="col-9 " id="precio">{{ precioTotal }} EUR</a>
                 <button class="checkout-button" data-bs-toggle="offcanvas"  @click="redirectToCheckout">CHECKOUT</button>
               </div>
             </div>
@@ -244,7 +244,7 @@ export default {
                 </div>
                 <div class="row" id="totalPrice">
                   <a class="col-3">TOTAL</a>
-                  <a class="col-9 " id="precio">{{ precioCarrito }} EUR</a>
+                  <a class="col-9 " id="precio">{{ precioTotal }} EUR</a>
                   <button class="checkout-button" data-bs-toggle="offcanvas"  @click="redirectToCheckout">CHECKOUT</button>
                 </div>
               </div>

@@ -38,7 +38,7 @@ export default {
 
     <ProductItem v-for="product in productos" :key="product.id" :product="product" ></ProductItem>
 
-    <button onclick="window.location.href='/productos'" class="botonMain btn btn-primary"><a href="/productos" class="btn-text">VER TODOS</a></button>
+    <button onclick="window.location.href='/productos'" class="btn ">VER TODOS</button>
 
   </div>
 
@@ -64,7 +64,7 @@ export default {
       </div>
     </div>
 
-    <button onclick="window.location.href='/categorias'" class="botonMain btn btn-primary"><a href="/categorias" class="btn-text">VER TODOS</a></button>
+    <button onclick="window.location.href='/categorias'" class="btn ">VER TODOS</button>
   </div>
   </div>
 
@@ -91,13 +91,6 @@ export default {
 section{
   display: none;
 }
-.img-carousel {
-  aspect-ratio: 16/17;
-  object-fit: cover; /* Mantiene la proporción y cubre el área designada */
-  width: 100%;
-
-}
-
 
 .card-product img{
   width: 100%;
@@ -112,17 +105,6 @@ section{
   border: solid white;
   text-align: center;
 }
-.nameProduct{
-  text-align: left;
-  font-family: 'Courier New', Courier, monospace;
-  color: black;
-}
-.namePrice{
-  float: right;
-  font-family: 'Courier New', Courier, monospace;
-  color: black;
-
-}
 .name-category{
   text-align: center;
   font-family: 'Courier New', Courier, monospace;
@@ -130,87 +112,27 @@ section{
 }
 .card-img-top {
   aspect-ratio: 16/17;
-  object-fit: cover; /* Mantiene la proporción y cubre el área designada */
+  object-fit: cover;
 
 }
-.botonMain{
+.btn{
   margin-left: 40%;
+  color: #efefef;
   background-color: rgb(78, 78, 78);
   border-color: rgb(78, 78, 78);
   width: 20%;
   border-radius: 10px;
   margin-bottom: 30px;
 }
-.btn-text{
-  text-decoration: none;
-  color: #ddd;
-}
-.btn-text:hover{
-  color: #ddd;
-}
-
-.fotosDiv{
-  padding: 2% 5% 5% 2%;
-}
-
-
-.information{
-  padding-top: 7%;
-}
-.boton{
-  margin-left: 25%;
-  background-color: rgb(78, 78, 78);
-  border-color: rgb(78, 78, 78);
-  width: 40%;
-  border-radius: 10px;
-}
-
-
-/* ------------------------------------------------- filtros formulario -------------------------------------*/
-#toggleFiltersBtn{
-  width: 80%;
-  height: 40px;
-  border-radius: 20px;
-}
-#ordenarPor{
-  float: right;
-  height: 40px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  padding: 0.5rem;
-  font-size: 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  outline: none;
-}
-.options{
-  padding: 1% 4%;
-}
-.filtrosForm{
-  padding: 5% 3% 0 5%;
-  border-right: solid;
+.btn:hover{
+  color: #212121 !important;
+  background-color: #eeeeee !important;
 }
 .filtrosForm legend{
   padding-top: 10%;
 }
 .filtros div div{
   border-bottom: solid 1px;
-}
-
-.linea-filtro{
-  padding: 5px;
-  font-size: 20px;
-}
-.linea-filtro input{
-  float: right;
-  margin-top: 4%
-}
-.btn-filtro{
-  margin-top: 10%;
-  margin-left: 20%;
-  background-color: rgb(212, 212, 212);
-  width: 60%;
-  border-radius: 10px;
 }
 
 /*  ------------------------------------------------------ css nav    ------------------------------------------*/
@@ -273,23 +195,13 @@ body{
 
 /* Media Queries */
 @media screen and (max-width: 667px){
-  .options{
-    margin-top: 20%;
-  }
-  .linea-filtro input{
-    margin-top: 2%
-  }
+
   section{
     display: block;
     margin: 0;
     max-height: 50%;
   }
-  #img-grande{
-    display: none;
-  }
-  .information{
-    margin-left: 5%;
-  }
+
 }
 
 

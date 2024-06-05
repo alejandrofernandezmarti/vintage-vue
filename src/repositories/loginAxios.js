@@ -42,7 +42,6 @@ export default{
     async register(user) {
         const userRegistered = await apiLogin.post(`/api/register`,user)
         return userRegistered.data.data
-
     }
 }
 

@@ -16,9 +16,9 @@
      <div class="col-xl-3 col-sm-6 col-12 mt-3 mt-xl-0">
        <h5>Políticas de la compañía</h5>
        <ul class="list-unstyled components">
-         <li><a href="/productos">Política de privacidad</a></li>
-         <li><a href="/selected">Aviso legal</a></li>
-         <li><a href="/">Políticas de servicio</a></li>
+         <li><a href="/privacy">Política de privacidad</a></li>
+         <li><a href="/aviso-legal">Aviso legal</a></li>
+         <li><a href="/politica-envios">Políticas de servicio</a></li>
        </ul>
      </div>
 

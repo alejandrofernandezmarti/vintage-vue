@@ -16,20 +16,22 @@ export const categoriasStore = defineStore('categoriasStore', {
         }
     },
     actions: {
-        async loadCarrito(){
-            const products =  JSON.parse(localStorage.getItem('carrito')) || [];
-            const productsMap = await Promise.all(products.map(pr => productsAxios.getProductById(pr.id)));
-            this.carrito = []
-            products.forEach((pr, index) => {
-                const prBdd = productsMap[index];
-                if ((prBdd.tipo === 'Selected' && !prBdd.vendido) || (prBdd.tipo === 'Box' && prBdd.activo)) {
-                    this.carrito.push(pr);
+        async loadCarrito() {
+            try {
+                const products = JSON.parse(localStorage.getItem('carrito')) || [];
+
+                if (products.length > 0) {
+                    const response = await productsAxios.getCarrito(products);
+                    this.carrito = response;
+                } else {
+                    this.carrito = [];
                 }
 
-            });
-            this.calcularPrecioTotal();
-            this.calculadoraEnvio();
-            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+                this.calcularPrecioTotal();
+                this.calculadoraEnvio();
+            } catch (error) {
+                console.error('Error al cargar el carrito:', error);
+            }
         },
         async loadCategorias() {
             try {
@@ -49,8 +51,18 @@ export const categoriasStore = defineStore('categoriasStore', {
                 precio_env : producto.precio_env,
                 precio_ud: producto.precio_ud
             };
+            const prodCartStr = {
+                id: producto.id,
+                nombre: producto.nombre,
+                cantidad: producto.cantidad,
+                descripcion: producto.descripcion,
+                tipo: producto.tipo,
+                precio_env : producto.precio_env,
+                precio_ud: producto.precio_ud
+            };
             this.carrito.push(productoCarrito);
-            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+            this.carritoStorage.push(prodCartStr)
+            localStorage.setItem('carrito', JSON.stringify(this.carritoStorage));
             this.calcularPrecioTotal();
             this.calculadoraEnvio();
         },
@@ -65,17 +77,31 @@ export const categoriasStore = defineStore('categoriasStore', {
                 precio_env : producto.precio_env,
                 precio_ud: precio
             };
+            const prodCartStr = {
+                id: producto.id,
+                nombre: producto.nombre,
+                cantidad: cantidad,
+                descripcion: producto.descripcion,
+                tipo: producto.tipo,
+                precio_env : producto.precio_env,
+                precio_ud: precio
+            };
             this.carrito.push(productoCarrito);
-
-            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+            this.carritoStorage.push(prodCartStr)
+            localStorage.setItem('carrito', JSON.stringify(this.carritoStorage));
             this.calcularPrecioTotal();
             this.calculadoraEnvio();
         },
         eliminarDelCarrito(index) {
             this.carrito.splice(index, 1);
-            localStorage.setItem('carrito', JSON.stringify(this.carrito));
+            this.carritoStorage.splice(index, 1);
+            localStorage.setItem('carrito', JSON.stringify(this.carritoStorage));
             this.calcularPrecioTotal();
             this.calculadoraEnvio();
+        },
+        vaciarCarrito(){
+            this.carritoStorage = []
+            localStorage.setItem('carrito', JSON.stringify(this.carritoStorage));
         },
         calcularPrecioTotal() {
             const precioTotal = this.carrito.reduce((total, item) => total + (item.precio_ud * item.cantidad), 0);

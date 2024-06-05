@@ -4,6 +4,7 @@
 
 <template>
   <div class="col-12 col-md-8 col-xl-6 container">
+    <h3>Política de privacidad</h3><br>
     <p>Nuestra política de privacidad esta de acuerdo a los cambios requeridos por la legislación europea en el Reglamento General de Protección de
       Datos aplicable a partir del 25 de mayo de 2018. A continuación, encontrarás todos los detalles de la nueva política que necesitas conocer.
       En resumen, estas actualizaciones se han realizado para hacer todo más fácil para ti, y la información es transparente y directa.</p><br>
