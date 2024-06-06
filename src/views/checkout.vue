@@ -34,8 +34,8 @@ export default {
 </script>
 
 <template>
-  <div class="row ">
-    <div class="col-0 col-lg-0 col-xl-2"></div>
+  <div v-if="carrito.length > 0" class="row ">
+    <div  class="col-0 col-lg-0 col-xl-2"></div>
 
     <div class="col-12 col-md-11 col-lg-6 col-xl-5 pt-5 mb-5 view">
       <h5 class="offset-1 freeShip">ENVÍO GRATUITO DESDE 400 EUR</h5>
@@ -78,13 +78,25 @@ export default {
           </div>
         </div>
       </div>
-
     </div>
-
+  </div>
+  <div v-else class="empty-cart-message text-center">
+    <h3 class="text-muted">Todavía no hay productos en tu carrito</h3>
   </div>
 </template>
 
 <style scoped>
+.empty-cart-message {
+  padding: 200px 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
+.empty-cart-message h3 {
+  font-weight: bold;
+  color: #6c757d;
+}
 .payBtn{
   margin-right: 10%;
   width: 83%;

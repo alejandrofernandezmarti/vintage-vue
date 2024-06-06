@@ -70,6 +70,10 @@ export default {
         const cycles = await apiLogin.get(`/api/productosRand`);
         return cycles.data.data;
     },
+    async selectedRandom() {
+        const cycles = await apiLogin.get(`/api/selectedRand`);
+        return cycles.data.data;
+    },
     async createProduct(product) {
         await apiLogin.post(`/api/productoCreate`,product);
     },

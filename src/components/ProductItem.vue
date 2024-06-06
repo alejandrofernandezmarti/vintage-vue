@@ -25,7 +25,6 @@ export default {
         <a :href="`/product/${product.id}`" class="nameProduct text-uppercase col-8">{{ product.nombre }}</a>
         <div class="col-4">
           <a :href="`/product/${product.id}`" class="namePrice mr-2">{{ formatPrice(product.precio_ud) }} EUR</a>
-
         </div>
       </div>
     </div>

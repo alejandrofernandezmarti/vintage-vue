@@ -94,11 +94,6 @@ export default {
                     <a href="/selected">Selected</a>
                   </button>
                 </li>
-                <li class="mb-1">
-                  <button class="btn-xs d-inline-flex" >
-                    Nosotros
-                  </button>
-                </li>
                 <li v-if="this.token != null" class="mb-1" >
                   <button class="btn-xs d-inline-flex" >
                     <a href="/cuenta">Cuenta</a>
@@ -125,7 +120,7 @@ export default {
               <h6 class="offcanvas-title" id="offcanvasExampleLabel">CARRITO</h6>
               <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <div class="offcanvas-body">
+            <div v-if="carrito.length > 0" class="offcanvas-body">
               <div v-for="(producto, index) in carrito" :key="index" class="cart-object row">
                 <img class="col-4 img-carrito" :src="producto.imagenes?.url_1" alt="Producto">
                 <div class="col-8">
@@ -144,6 +139,9 @@ export default {
                 <a class="col-9 " id="precio">{{ precioTotal }} EUR</a>
                 <button class="checkout-button" data-bs-toggle="offcanvas"  @click="redirectToCheckout">CHECKOUT</button>
               </div>
+            </div>
+            <div v-else>
+              <h4 class="empty-cart-message">Añade productos al carrito</h4>
             </div>
           </div>
         </div>
@@ -198,11 +196,6 @@ export default {
               SELECTED
             </a>
           </li>
-          <li>
-            <a href = "#" class = "menu-link">
-              NOSOTROS
-            </a>
-          </li>
         </div>
 
         <div class = "d-none d-sm-block brand-and-icon order-1  order-md-2 col-6">
@@ -228,7 +221,7 @@ export default {
                 <h6 class="offcanvas-title" id="offcanvasExampleLabel">CARRITO</h6>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
               </div>
-              <div class="offcanvas-body">
+              <div v-if="carrito.length > 0" class="offcanvas-body">
                 <div v-for="(producto, index) in carrito" :key="index" class="cart-object row">
                   <img class="col-4 img-carrito" :src="producto.imagenes?.url_1" alt="Producto">
                   <div class="col-8">
@@ -248,6 +241,9 @@ export default {
                   <button class="checkout-button" data-bs-toggle="offcanvas"  @click="redirectToCheckout">CHECKOUT</button>
                 </div>
               </div>
+              <div v-else>
+                <h4 class="empty-cart-message">Añade productos al carrito</h4>
+              </div>
             </div>
           </div>
         </div>
@@ -260,6 +256,14 @@ export default {
 </template>
 
 <style scoped>
+.empty-cart-message {
+  text-align: center;
+  margin-top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  color: #555;
+  font-weight: 400;
+}
 .logo{
   width: 70%;
 }

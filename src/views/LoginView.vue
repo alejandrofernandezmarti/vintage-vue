@@ -77,7 +77,7 @@ export default {
       <div class="mt-2">
         <a href="https://backend.projecteg3.ddaw.es/forgot-password">He olvidado mi contraseña</a>
       </div>
-      <div>No tienes una cuenta? <a href="/register">Registrate aquí</a></div>
+      <div class="mb-5">No tienes una cuenta? <a href="/register">Registrate aquí</a></div>
     </div>
   </div>
 </template>
