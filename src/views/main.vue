@@ -26,7 +26,9 @@ export default {
     this.selected = await productsAxios.selectedRandom();
   },
   methods: {
-
+    toUpperCase(text) {
+      return text.toUpperCase();
+    }
   }
 }
 </script>
@@ -72,7 +74,7 @@ export default {
         <div class="card-product">
           <img :src="'/categorias/' + selectItem.imagen" class="card-img-top" :alt="selectItem.nombre">
           <div class="card-body row g-0">
-            <a :href="`/productos/${selectItem.id}`" class="name-category">{{ selectItem.nombre }}</a>
+            <a :href="`/productos/${selectItem.id}`" class="name-category">{{ toUpperCase(selectItem.nombre) }}</a>
           </div>
         </div>
       </div>
@@ -169,8 +171,11 @@ export default {
   border: none;
   text-align: center;
   padding: 0;
+  transition: ease-in-out 0.2s;
 }
-
+.btn-main:hover{
+  background-color: #eaeaea;
+}
 .btn {
   margin-left: 40%;
   margin-top: 25px;

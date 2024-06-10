@@ -75,7 +75,7 @@ export default {
         </div>
       </Form>
       <div class="mt-2">
-        <a href="https://backend.projecteg3.ddaw.es/forgot-password">He olvidado mi contraseña</a>
+        <a href="http://127.0.0.1:8000/password/reset/">He olvidado mi contraseña</a>
       </div>
       <div class="mb-5">No tienes una cuenta? <a href="/register">Registrate aquí</a></div>
     </div>
