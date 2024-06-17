@@ -15,7 +15,7 @@
     </p><br>
     <h6><strong>Condiciones de Uso</strong></h6>
     <p>
-      El usuario se compromete a hacer un uso adecuado de los contenidos y servicios que Eme STQG S.L. ofrece a través de este sitio web y, con carácter enunciativo pero no limitativo, a no emplearlos para:
+      El usuario se compromete a hacer un uso adecuado de los contenidos y servicios que Vintage Peninsula ofrece a través de este sitio web y, con carácter enunciativo pero no limitativo, a no emplearlos para:
     </p>
     <ul>
       <li>Incurrir en actividades ilícitas, ilegales o contrarias a la buena fe y al orden público.</li>
@@ -40,7 +40,7 @@
     </p><br>
     <h6><strong>Enlaces</strong></h6>
     <p>
-      En el caso de que se dispusiesen enlaces o hipervínculos hacía otros sitios de Internet, Eme STQG S.L. no ejercerá ningún tipo de control sobre dichos sitios y contenidos. En ningún caso Eme STQG S.L. asumirá responsabilidad alguna por los contenidos de algún enlace perteneciente a un sitio web ajeno, ni garantizará la disponibilidad técnica, calidad, fiabilidad, exactitud, amplitud, veracidad, validez y constitucionalidad de
+      En el caso de que se dispusiesen enlaces o hipervínculos hacía otros sitios de Internet, Vintage Wholesale Peninsula no ejercerá ningún tipo de control sobre dichos sitios y contenidos. En ningún caso Vintage Wholesale Peninsula asumirá responsabilidad alguna por los contenidos de algún enlace perteneciente a un sitio web ajeno, ni garantizará la disponibilidad técnica, calidad, fiabilidad, exactitud, amplitud, veracidad, validez y constitucionalidad de
       cualquier material o información contenida en ninguno de dichos hipervínculos u otros sitios de Internet.
     </p><br>
     <h6><strong>Derecho de Exclusión</strong></h6>

@@ -35,4 +35,7 @@ export default {
 .namePrice{
   justify-content: left;
 }
+.card-product{
+  padding-bottom: 10px;
+}
 </style>

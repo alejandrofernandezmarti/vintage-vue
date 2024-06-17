@@ -34,10 +34,15 @@ export default {
 
 <template>
   <div class="row">
-    <div class="productos-filtrados col-12">
+    <div v-if="this.productosSelected.length > 0" class="productos-filtrados col-12">
       <div class="bloque row g-0">
         <ProductItem v-for="product in productosSelected" :key="product.id" :product="product" ></ProductItem>
       </div>
+    </div>
+    <div v-else class="no-products col-12 text-center mt-5">
+      <i class="fas fa-box-open no-products-icon"></i>
+      <h3>¡Lo sentimos!</h3>
+      <p class="no-products-message">Los productos de esta categoría están agotados. Vuelve pronto para ver las novedades.</p>
     </div>
   </div>
 </template>

@@ -49,7 +49,7 @@ section{
 }
 .card-body{
     min-height: 5px;
-    padding:  10px 0px 0px 10px !important;
+    padding:  5px 4px 0px 8px !important;
 }
 .card-body a{
     text-decoration: none;
@@ -108,7 +108,9 @@ section{
     width: 40%;
     border-radius: 10px;
 }
-
+.no-products{
+    margin-bottom: 300px !important;
+}
 
 /*  ------------------------------------------------------ css nav    ------------------------------------------*/
 *{

@@ -26,7 +26,7 @@ export const categoriasStore = defineStore('categoriasStore', {
                 } else {
                     this.carrito = [];
                 }
-
+                localStorage.setItem('carrito', JSON.stringify(this.carrito));
                 this.calcularPrecioTotal();
                 this.calculadoraEnvio();
             } catch (error) {

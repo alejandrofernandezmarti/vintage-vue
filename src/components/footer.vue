@@ -54,6 +54,7 @@
   width: 100%;
   color: white;
   padding: 3%;
+  margin-top: 35px;
 }
 a{
   text-decoration: none;
