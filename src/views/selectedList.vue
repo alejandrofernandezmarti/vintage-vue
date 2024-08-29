@@ -22,7 +22,6 @@ export default {
   },
 
   methods: {
-
     async loadProducts() {
       this.productosSelected = await productsAxios.getAllSelected();
     },

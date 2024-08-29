@@ -7,6 +7,7 @@ import createProduct from "@/views/createProduct.vue";
 import miCuenta from "@/views/miCuenta.vue";
 import login from "@/views/LoginView.vue";
 import index from "@/views/main.vue"
+import servicios from "@/views/servicios.vue"
 import orderDetail from "@/views/orderDetail.vue";
 import checkout from "@/views/checkout.vue"
 import register from "@/views/RegisterView.vue"
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/selected',
       name: 'Nuestras selecciones',
       component: selectedList,
+    },
+    {
+      path: '/servicios',
+      name: 'Nuestros servicios',
+      component: servicios,
     },
     {
       path: '/categorias',

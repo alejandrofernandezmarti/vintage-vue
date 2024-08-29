@@ -155,8 +155,14 @@ export default {
           <button v-if="enCarrito" class="boton btn ">AÑADIDO CORRECTAMENTE</button>
           <button v-if="!enCarrito" @click="agregarAlCarrito" class="boton btn ">AÑADIR AL CARRITO</button>
         </span>
-
-
+      <div v-if="product.tipo === 'Selected'" class="question">
+        <p style="font-weight: bold">¿Qué es un BOX?</p>
+        <p>Son packs únicos en los cuales sabes de antemano los productos que vas a recibir , es decir, los productos que ves en las imágenes son los que recibirás.</p>
+      </div>
+      <div v-if="product.tipo === 'Box'" class="question">
+        <p style="font-weight: bold">¿Qué es un lote?</p>
+        <p>Son sacos clásicos en los que encontrarás productos similares a los de las imágenes con sus mismas características, hay un mínimo margen de error del 10% .</p>
+      </div>
 
     </div>
 
@@ -165,6 +171,9 @@ export default {
 </template>
 
 <style>
+.question{
+  padding-right: 10% ;
+}
 .btn{
   border: 1px solid #000000 !important;
   margin-bottom: 100px !important;

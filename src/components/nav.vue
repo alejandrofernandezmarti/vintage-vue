@@ -47,7 +47,7 @@ export default {
         <span class="fas fa-bars options" data-bs-toggle="offcanvas" href="#offcanvasCat" role="button" aria-controls="offcanvasExample"></span>
       </div>
       <div class="col-4 xs-logo ">
-        <a href="/"><img class="logo" src="/logos/logoPeninsula2.jpeg"></a>
+        <a href="/"><img class="logo" src="/logos/logoVV3.png"></a>
 
         <div class="offcanvas-wrapper">
           <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasCat" aria-labelledby="offcanvasExampleLabel">
@@ -91,7 +91,7 @@ export default {
                 </li>
                 <li class="mb-1">
                   <button class="btn-xs d-inline-flex" >
-                    <a href="/selected">Selected</a>
+                    <a href="/selected">Boxes</a>
                   </button>
                 </li>
                 <li v-if="this.token != null" class="mb-1" >
@@ -185,22 +185,25 @@ export default {
                   <li><a href = "/productos/10">Bolsos</a></li>
                 </ul>
               </div>
-              <div class = "sub-menu-item">
-                <h2>Vintage clothing</h2>
-              </div>
+
             </div>
           </li>
 
           <li>
             <a href = "/selected" class = "menu-link">
-              SELECTED
+              BOXES
             </a>
+          </li>
+          <li>
+          <a href = "/servicios" class = "menu-link">
+            SERVICIOS
+          </a>
           </li>
         </div>
 
         <div class = "d-none d-sm-block brand-and-icon order-1  order-md-2 col-6">
           <li >
-            <a href = "/" class = "navbar-brand xs-logo"><img class="logo" src="/logos/logoPeninsula2.jpeg"></a>
+            <a href = "/" class = "navbar-brand xs-logo"><img class="logo" src="/logos/logoVV3.png"></a>
           </li>
         </div>
         <div class="nav-right navbar-nav order-3 justify-content-end col-2">

@@ -39,7 +39,7 @@ export default {
       <div class="fondo col-12">
         <div class="overlay"></div>
         <img src="/fondo.jpg" alt="Fondo">
-        <div class="text-overlay">VINTAGE WHOLESALE PENINSULA</div>
+        <div class="text-overlay">VALENCIA VINTAGE WHOLESALE</div>
       </div>
     </div>
 
@@ -51,17 +51,8 @@ export default {
       </div>
     </div>
 
-    <div class="row no-gutters">
-      <div class="fondo col-6">
-        <img src="/fotoModelo.webp" alt="Foto Modelo">
-      </div>
-      <div class="fondo col-6">
-        <img src="/categorias.webp" alt="Categorias">
-      </div>
-    </div>
-
     <div class="bloque row g-0">
-      <a class="titulos col-12"><strong>NUESTRA SELECCIÓN</strong></a>
+      <a class="titulos col-12"><strong>BOXES</strong></a>
       <ProductItem v-for="product in selected" :key="product.id" :product="product"></ProductItem>
       <div class="col-6 col-md-4 col-xl-3 mb-2">
         <button onclick="window.location.href='/selected'" class="btn-main">VER TODOS</button>
@@ -69,7 +60,7 @@ export default {
     </div>
 
     <div class="bloque row no-gutters g-0">
-      <a class="titulos col-12"><strong>NUESTRAS CATEGORÍAS</strong></a>
+      <a class="titulos col-12"><strong>LOTES</strong></a>
       <div v-for="selectItem in categorias" :key="selectItem.id" class="col-6 col-md-4 col-xl-3 mb-2">
         <div class="card-product">
           <img :src="'/categorias/' + selectItem.imagen" class="card-img-top" :alt="selectItem.nombre">

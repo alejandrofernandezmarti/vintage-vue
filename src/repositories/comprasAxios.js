@@ -45,5 +45,9 @@ export default {
   async newOrder(){
     const cycles = await apiCycles.post('/api/compras/newOrder')
     return cycles.data.data
+  },
+  async customOrder(orderData){
+    const cycles = await apiCycles.post('/customOrder',orderData)
+    return cycles.data.data
   }
 }
