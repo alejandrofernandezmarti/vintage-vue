@@ -58,7 +58,7 @@ export default {
         </div>
       </div>
 
-      <form ref="form" action="http://127.0.0.1:8000/checkout" method="POST">
+      <form ref="form" action="https://api.valenciavintagewholesale.com/checkout" method="POST">
         <input type="hidden" name="productos[]" v-for="(producto, index) in carrito" :key="index" :value="JSON.stringify(producto)">
         <input type="hidden" name="email" :value="this.user.email">
         <input type="hidden" name="id" :value="this.user.id">
