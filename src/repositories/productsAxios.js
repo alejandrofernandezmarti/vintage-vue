@@ -47,7 +47,7 @@ export default {
     },
     async getAllSelected() {
         const products = await apiLogin.get('/api/productosSelected/');
-        return products.data.data;
+        return products.data;
     },
     async getProductById(idProduct) {
         const product = await apiLogin.get(`/api/productos/${idProduct}`);
