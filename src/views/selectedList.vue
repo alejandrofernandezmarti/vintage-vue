@@ -23,10 +23,7 @@ export default {
   },
   methods: {
     async loadProducts() {
-      const productsBase = await productsAxios.getAllSelected();
-      this.nextUrl = productsBase.links?.next;
-      console.log(this.nextUrl);
-      this.productos = productsBase.data;
+      this.productos = await productsAxios.selectedRandom();
     },
     async loadMoreProducts() {
       if (this.nextUrl) {
