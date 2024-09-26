@@ -42,11 +42,11 @@ export default {
         return products.data;
     },
     async getLotes() {
-        const products = await apiLogin.get('/api/productosLotes/');
+        const products = await apiLogin.get('/api/boxIndex/');
         return products.data;
     },
     async getAllSelected() {
-        const products = await apiLogin.get('/api/productosSelected/');
+        const products = await apiLogin.get('/api/selectIndex/');
         return products.data;
     },
     async getProductById(idProduct) {
